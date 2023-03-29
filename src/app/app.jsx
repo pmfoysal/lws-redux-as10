@@ -1,5 +1,6 @@
+import Admin from '../pages/admin';
 import Layout from '../layouts/layout';
-import { Admin, Student } from '../pages';
+import Student from '../pages/student';
 import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
