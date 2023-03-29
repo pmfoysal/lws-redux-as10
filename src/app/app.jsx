@@ -8,8 +8,11 @@ export default function App() {
       <Routes>
          <Route path='/' element={<Layout />}>
             <Route index element={<Student.Signin />} />
+            <Route path='signin' element={<Student.Signin />} />
+            <Route path='signup' element={<Student.Signup />} />
             <Route path='admin'>
                <Route index element={<Admin.Signin />} />
+               <Route path='signin' element={<Admin.Signin />} />
             </Route>
          </Route>
       </Routes>
