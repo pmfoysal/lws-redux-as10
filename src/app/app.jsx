@@ -32,7 +32,7 @@ export default function App() {
                   <Route path='video/add' element={<Admin.VideoAdd />} />
                   <Route path='video/edit/:id_title' element={<Admin.VideoEdit />} />
 
-                  <Route path='quizes' element={<Admin.QuizList />} />
+                  <Route path='quizzes' element={<Admin.QuizList />} />
                   <Route path='quiz/add' element={<Admin.QuizAdd />} />
                   <Route path='quiz/edit/:id_title' element={<Admin.QuizEdit />} />
 
