@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import Head from '../../components/head';
-import VideoItem from '../../components/videoItem';
+import VideoSidebar from '../../components/videoSidebar';
 
 export default function Video() {
    return (
@@ -46,13 +46,7 @@ export default function Video() {
                         </p>
                      </div>
                   </div>
-                  <div className='col-span-full lg:col-auto max-h-[570px] overflow-y-auto bg-secondary p-4 rounded-md border border-slate-50/10 divide-y divide-slate-600/30'>
-                     <VideoItem />
-                     <VideoItem />
-                     <VideoItem />
-                     <VideoItem />
-                     <VideoItem />
-                  </div>
+                  <VideoSidebar />
                </div>
             </div>
          </section>
