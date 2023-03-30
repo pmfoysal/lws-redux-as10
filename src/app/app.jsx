@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Layout from '../layouts/layout';
-import { Admin, Student } from '../pages';
 import { Route, Routes } from 'react-router-dom';
+import { Admin, Student, Common } from '../pages';
 import PageLoader from '../components/pageLoader';
 
 export default function App() {
@@ -12,6 +12,7 @@ export default function App() {
                <Route index element={<Student.Signin />} />
                <Route path='signin' element={<Student.Signin />} />
                <Route path='signup' element={<Student.Signup />} />
+               <Route path='forget-password' element={<Common.ForgetPassword />} />
 
                <Route path='quiz/:id_title' element={<Student.Quiz />} />
                <Route path='video/:id_title' element={<Student.Video />} />

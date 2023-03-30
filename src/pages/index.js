@@ -1,5 +1,9 @@
 import { lazy } from 'react';
 
+export const Common = {
+   ForgetPassword: lazy(() => import('./common/forgetPassword')),
+};
+
 export const Student = {
    Quiz: lazy(() => import('./student/quiz')),
    Video: lazy(() => import('./student/video')),

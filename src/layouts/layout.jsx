@@ -5,7 +5,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 export default function Layout() {
    const { pathname } = useLocation();
-   const authRoutes = ['/', '/signin', '/signup', '/admin', '/admin/signin', '/admin/signup'];
+   const authRoutes = ['/', '/signin', '/signup', '/forget-password', '/admin', '/admin/signin', '/admin/signup'];
 
    return (
       <Fragment>
