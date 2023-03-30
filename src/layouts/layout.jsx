@@ -1,11 +1,14 @@
 import { Fragment } from 'react';
-import { Outlet } from 'react-router-dom';
 import Header from '../components/common/header';
+import { Outlet, useLocation } from 'react-router-dom';
 
 export default function Layout() {
+   const { pathname } = useLocation();
+   const authRoutes = ['/', '/signin', '/signup', '/admin', '/admin/signin', '/admin/signup'];
+
    return (
       <Fragment>
-         <Header />
+         {!authRoutes.includes(pathname) ? <Header /> : null}
          <Outlet />
       </Fragment>
    );
