@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import Layout from '../layouts/layout';
+import Sitemap from '../pages/common/sitemap';
 import { Route, Routes } from 'react-router-dom';
 import { Admin, Student, Common } from '../pages';
 import PageLoader from '../components/pageLoader';
@@ -10,6 +11,7 @@ export default function App() {
          <Routes>
             <Route path='/' element={<Layout />}>
                <Route index element={<Student.Signin />} />
+               <Route path='sitemap' element={<Sitemap />} />
                <Route path='signin' element={<Student.Signin />} />
                <Route path='signup' element={<Student.Signup />} />
                <Route path='forget-password' element={<Common.ForgetPassword />} />
