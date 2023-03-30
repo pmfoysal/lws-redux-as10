@@ -4,9 +4,9 @@ export const Student = {
    Quiz: lazy(() => import('./student/quiz')),
    Video: lazy(() => import('./student/video')),
    Signin: lazy(() => import('./student/signin')),
+   Signup: lazy(() => import('./student/signup.jsx')),
    Assignment: lazy(() => import('./student/assignment')),
    Leaderboard: lazy(() => import('./student/leaderboard')),
-   Signup: lazy(() => import('../components/signup')),
 };
 
 export const Admin = {

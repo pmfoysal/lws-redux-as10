@@ -1,5 +1,6 @@
-import { Fragment } from 'react';
 import Header from '../components/header';
+import { Fragment, Suspense } from 'react';
+import PageLoader from '../components/pageLoader';
 import { Outlet, useLocation } from 'react-router-dom';
 
 export default function Layout() {
@@ -9,7 +10,9 @@ export default function Layout() {
    return (
       <Fragment>
          {!authRoutes.includes(pathname) ? <Header /> : null}
-         <Outlet />
+         <Suspense fallback={<PageLoader />}>
+            <Outlet />
+         </Suspense>
       </Fragment>
    );
 }
