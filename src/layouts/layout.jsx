@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Header from '../components/common/header';
+import Header from '../components/header';
 import { Outlet, useLocation } from 'react-router-dom';
 
 export default function Layout() {
