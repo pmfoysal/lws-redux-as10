@@ -10,7 +10,7 @@ export default function Header() {
                   Leaderboard
                </Link>
                <h2>Saad Hasan</h2>
-               <button class='flex gap-2 border border-cyan items-center px-4 py-1 rounded-full text-sm transition-all hover:bg-cyan '>
+               <button class='flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium'>
                   <svg
                      xmlns='http://www.w3.org/2000/svg'
                      fill='none'
