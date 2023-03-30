@@ -8,13 +8,10 @@ export default function Sitemap() {
          <Link to='/signup'>Student - Signup</Link>
          <Link to='/forget-password'>Student - Forget Password</Link>
 
-         <Link to='/video/1-some-awesome-video-title'>Student - Video</Link>
-         <Link to='/quiz/1-some-awesome-video-title'>Student - Quiz</Link>
          <Link to='/leaderboard'>Student - Leaderboard</Link>
-
+         <Link to='/quiz/1-some-awesome-video-title'>Student - Quiz</Link>
+         <Link to='/video/1-some-awesome-video-title'>Student - Video</Link>
          <Link to='/assignment/1-some-awesome-video-title'>Student - Assignment Details</Link>
-         <Link to='/assignment/submit/1-some-awesome-video-title'>Student - Assignment Submit</Link>
-         <Link to='/assignment/result/1-some-awesome-video-title'>Student - Assignment Result</Link>
 
          <Link to='/admin/signin'>Admin - Signin</Link>
          <Link to='/admin/dashboard'>Admin - Dashboard</Link>

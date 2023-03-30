@@ -27,3 +27,7 @@
    background-color: rgb(30 41 59 / var(--tw-bg-opacity));
    margin-left: 5px;
 }
+
+.font-normal {
+   font-weight: 400;
+}

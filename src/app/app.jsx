@@ -19,10 +19,7 @@ export default function App() {
                <Route path='quiz/:id_title' element={<Student.Quiz />} />
                <Route path='video/:id_title' element={<Student.Video />} />
                <Route path='leaderboard' element={<Student.Leaderboard />} />
-
-               <Route path='assignment/:id_title' element={<Student.AssignmentDetails />} />
-               <Route path='assignment/submit/:id_title' element={<Student.AssignmentSubmit />} />
-               <Route path='assignment/result/:id_title' element={<Student.AssignmentResult />} />
+               <Route path='assignment/:id_title' element={<Student.Assignment />} />
 
                {/* === === ================================= === === */}
 

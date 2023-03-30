@@ -1,10 +1,10 @@
 import { Fragment } from 'react';
 import Head from '../../components/head';
 
-export default function AssignmentDetails() {
+export default function Assignment() {
    return (
       <Fragment>
-         <Head title={`Assignment Details - `} desc={`Assignment of ""`} />
+         <Head title={`Assignment - `} desc={`Assignment of ""`} />
          <section className='py-6'>
             <div className='mx-auto max-w-7xl px-5 py-6 lg:px-0'>
                <article>
@@ -16,7 +16,6 @@ export default function AssignmentDetails() {
                      Total Mark: <span className='total-mark rounded-md'>100</span>
                   </h3>
                </article>
-               {/* <br /> */}
                <article className='mt-8'>
                   <label>
                      <p>Repository Link:</p>
@@ -32,6 +31,18 @@ export default function AssignmentDetails() {
                   >
                      <span className='px-4'>Submit</span>
                   </button>
+               </article>
+               <br />
+               <article className='mt-8'>
+                  <h3 className='text-lg font-medium mt-2'>
+                     Submit Date: <span className='font-normal'>30 March, 2023 at 10:23:45 PM</span>
+                  </h3>
+                  <h3 className='text-lg font-medium mt-2'>
+                     Status: <span className='font-normal'>Pending</span>
+                  </h3>
+                  <h3 className='text-lg font-medium mt-2'>
+                     Result: <span className='total-mark rounded-md'>100</span>
+                  </h3>
                </article>
             </div>
          </section>

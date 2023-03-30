@@ -9,10 +9,8 @@ export const Student = {
    Video: lazy(() => import('./student/video')),
    Signin: lazy(() => import('./student/signin')),
    Signup: lazy(() => import('./student/signup.jsx')),
+   Assignment: lazy(() => import('./student/assignment')),
    Leaderboard: lazy(() => import('./student/leaderboard')),
-   AssignmentResult: lazy(() => import('./student/assignmentResult')),
-   AssignmentSubmit: lazy(() => import('./student/assignmentSubmit')),
-   AssignmentDetails: lazy(() => import('./student/assignmentDetails')),
 };
 
 export const Admin = {
