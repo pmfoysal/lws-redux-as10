@@ -1,7 +1,14 @@
 export default function AssignmentForm({ mode }) {
    return (
       <form className='add-form'>
-         <input type='text' autoComplete required className='login-input rounded-md' placeholder='Video Title' />
+         <input
+            type='text'
+            autoComplete
+            required
+            className='login-input rounded-md'
+            placeholder='Video Title'
+            readOnly={mode === 'edit'}
+         />
          <input type='text' autoComplete required className='login-input rounded-md' placeholder='Assignment Title' />
          <input type='text' autoComplete required className='login-input rounded-md' placeholder='Total Marks' />
          <button

@@ -6,6 +6,11 @@ textarea {
    resize: none;
 }
 
+*:read-only:focus {
+   --tw-ring-opacity: 0;
+   border-color: rgb(51 65 85 / 0.6);
+}
+
 .pages-signin {
    min-height: calc(100vh - 64px);
 }
