@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function SigninForm() {
    return (
       <form className='mt-8 space-y-6' action='#' method='POST'>
@@ -35,9 +37,9 @@ export default function SigninForm() {
 
          <div className='flex items-center justify-end'>
             <div className='text-sm'>
-               <a href='#' className='font-medium text-violet-600 hover:text-violet-500'>
+               <Link to='/forget-password' className='font-medium text-violet-600 hover:text-violet-500'>
                   Forgot your password?
-               </a>
+               </Link>
             </div>
          </div>
          <div>
