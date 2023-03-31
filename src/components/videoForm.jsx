@@ -1,9 +1,8 @@
 export default function VideoForm({ mode }) {
    return (
       <form className='add-form'>
-         <input name='title' type='text' autoComplete required className='login-input rounded-md' placeholder='Video Title' />
+         <input type='text' autoComplete required className='login-input rounded-md' placeholder='Video Title' />
          <textarea
-            name='description'
             type='text'
             autoComplete
             required
@@ -11,17 +10,10 @@ export default function VideoForm({ mode }) {
             className='login-input rounded-md'
             placeholder='Video Description'
          />
-         <input name='url' type='url' autoComplete required className='login-input rounded-md' placeholder='Video Url' />
+         <input type='url' autoComplete required className='login-input rounded-md' placeholder='Video Url' />
          <div className='input-group'>
-            <input name='views' type='text' autoComplete required className='login-input rounded-md' placeholder='Total Views' />
-            <input
-               name='duration'
-               type='text'
-               autoComplete
-               required
-               className='login-input rounded-md'
-               placeholder='Total Duration'
-            />
+            <input type='text' autoComplete required className='login-input rounded-md' placeholder='Total Views' />
+            <input type='text' autoComplete required className='login-input rounded-md' placeholder='Total Duration' />
          </div>
          <button
             type='submit'
