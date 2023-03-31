@@ -18,14 +18,14 @@ export default function QuizForm({ mode }) {
 
    function handleQuestion(value, index) {
       setQuestions(prev => {
-         return prev.map((q, i) => {
-            if (index === i) {
+         return prev.map((question, qI) => {
+            if (index === qI) {
                return {
-                  ...q,
+                  ...question,
                   question: value,
                };
             }
-            return q;
+            return question;
          });
       });
    }
