@@ -1,6 +1,6 @@
 import api from '../../api';
 
-const quizzes = api.injectEndpoints({
+export default api.injectEndpoints({
    endpoints: builder => ({
       getQuizzes: builder.query({
          query: () => '/quizzes',
@@ -30,6 +30,3 @@ const quizzes = api.injectEndpoints({
       }),
    }),
 });
-
-export default quizzes;
-export const { useGetQuizzesQuery, useGetQuizQuery, useAddQuizMutation, useEditQuizMutation, useDeleteQuizMutation } = quizzes;

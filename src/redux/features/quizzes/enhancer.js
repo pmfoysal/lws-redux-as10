@@ -2,7 +2,7 @@ import quizzes from './endpoints';
 
 const { updateQueryData } = quizzes.util;
 
-quizzes.enhanceEndpoints({
+const enhancedQuizzes = quizzes.enhanceEndpoints({
    endpoints: {
       addQuiz: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
@@ -53,3 +53,6 @@ quizzes.enhanceEndpoints({
       },
    },
 });
+
+export const { useGetQuizzesQuery, useGetQuizQuery, useAddQuizMutation, useEditQuizMutation, useDeleteQuizMutation } =
+   enhancedQuizzes;
