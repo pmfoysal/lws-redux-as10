@@ -1,8 +1,24 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import PageLoader from './pageLoader';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSigninMutation } from '../redux/features/auth/enhancer';
 
 export default function SigninForm() {
+   const navigate = useNavigate();
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+   const [signin, { isLoading }] = useSigninMutation();
+
+   function handleSignin(event) {
+      event.preventDefault();
+      signin({ email, password }).then(({ data }) => {
+         if (data?.accessToken) navigate('/video');
+      });
+   }
+
    return (
-      <form className='mt-8 space-y-6' action='#' method='POST'>
+      <form className='mt-8 space-y-6' onSubmit={handleSignin}>
+         {isLoading ? <PageLoader /> : null}
          <input type='hidden' name='remember' value='true' />
          <div className='rounded-md shadow-sm -space-y-px'>
             <div>
@@ -10,13 +26,15 @@ export default function SigninForm() {
                   Email address
                </label>
                <input
-                  id='email-address'
+                  required
                   name='email'
                   type='email'
+                  value={email}
+                  id='email-address'
                   autoComplete='email'
-                  required
-                  className='login-input rounded-t-md'
                   placeholder='Email address'
+                  className='login-input rounded-t-md'
+                  onChange={e => setEmail(e.target.value)}
                />
             </div>
             <div>
@@ -24,13 +42,15 @@ export default function SigninForm() {
                   Password
                </label>
                <input
+                  required
                   id='password'
                   name='password'
                   type='password'
-                  autoComplete='current-password'
-                  required
-                  className='login-input rounded-b-md'
+                  value={password}
                   placeholder='Password'
+                  autoComplete='current-password'
+                  className='login-input rounded-b-md'
+                  onChange={e => setPassword(e.target.value)}
                />
             </div>
          </div>

@@ -5,6 +5,7 @@ import './styles/custom.css';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
+import Message from './components/message';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -16,6 +17,7 @@ root.render(
          <BrowserRouter>
             <HelmetProvider>
                <App />
+               <Message />
             </HelmetProvider>
          </BrowserRouter>
       </Provider>

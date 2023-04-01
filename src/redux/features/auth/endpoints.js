@@ -1,6 +1,6 @@
 import api from '../../api';
 
-const auth = api.injectEndpoints({
+export default api.injectEndpoints({
    endpoints: builder => ({
       signin: builder.mutation({
          query: data => ({
@@ -18,6 +18,3 @@ const auth = api.injectEndpoints({
       }),
    }),
 });
-
-export default auth;
-export const {} = auth;

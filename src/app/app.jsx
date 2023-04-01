@@ -17,6 +17,7 @@ export default function App() {
                <Route path='forget-password' element={<Common.ForgetPassword />} />
 
                <Route path='quiz/:id_title' element={<Student.Quiz />} />
+               <Route path='video' element={<Student.Video />} />
                <Route path='video/:id_title' element={<Student.Video />} />
                <Route path='leaderboard' element={<Student.Leaderboard />} />
                <Route path='assignment/:id_title' element={<Student.Assignment />} />
