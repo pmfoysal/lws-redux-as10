@@ -1,5 +1,5 @@
 import auth from './endpoints';
-import { setUser } from '../others/auth';
+import { setAuth } from '../others/auth';
 import message from '../../../utilities/message';
 
 const enhancedAuth = auth.enhanceEndpoints({
@@ -8,7 +8,7 @@ const enhancedAuth = auth.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(setUser(result));
+               dispatch(setAuth(result));
             } catch (error) {
                message.error(error.error.data);
             }

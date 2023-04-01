@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import signoutThunk from '../../middlewares/signoutThunk';
 
 const initialState = {
    user: {},
@@ -9,15 +10,29 @@ const auth = createSlice({
    name: 'auth',
    initialState,
    reducers: {
-      setUser: (state, action) => {
+      setAuth: (state, action) => {
          const { user, accessToken } = action.payload;
          state.user = user;
          state.token = accessToken;
+         localStorage.setItem('token', accessToken);
          localStorage.setItem('user', JSON.stringify(user));
-         localStorage.setItem('token', JSON.stringify(accessToken));
       },
+      signout: state => {
+         state.user = {};
+         state.token = '';
+         localStorage.removeItem('user');
+         localStorage.removeItem('token');
+      },
+   },
+   extraReducers: builder => {
+      builder.addCase(signoutThunk.fulfilled, state => {
+         state.user = {};
+         state.token = '';
+         localStorage.removeItem('user');
+         localStorage.removeItem('token');
+      });
    },
 });
 
 export default auth.reducer;
-export const { setUser } = auth.actions;
+export const { setAuth, signout } = auth.actions;

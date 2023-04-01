@@ -1,6 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import signoutThunk from '../redux/middlewares/signoutThunk';
 
 export default function Header() {
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
+
+   function handleSignout() {
+      dispatch(signoutThunk()).then(({ payload: role }) => {
+         if (role === 'admin') navigate('/admin/signin');
+         else navigate('/signin');
+      });
+   }
+
    return (
       <nav className='shadow-md'>
          <div className='max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3'>
@@ -12,7 +24,10 @@ export default function Header() {
                   Leaderboard
                </Link>
                <h2>Saad Hasan</h2>
-               <button className='flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium'>
+               <button
+                  className='flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium'
+                  onClick={handleSignout}
+               >
                   <svg
                      xmlns='http://www.w3.org/2000/svg'
                      fill='none'
