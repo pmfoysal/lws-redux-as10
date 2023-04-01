@@ -2,7 +2,7 @@ import assignmentMarks from './endpoints';
 
 const { updateQueryData } = assignmentMarks.util;
 
-assignmentMarks.enhanceEndpoints({
+const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
    endpoints: {
       addAssignmentMark: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
@@ -53,3 +53,11 @@ assignmentMarks.enhanceEndpoints({
       },
    },
 });
+
+export const {
+   useGetAssignmentMarksQuery,
+   useGetAssignmentMarkQuery,
+   useAddAssignmentMarkMutation,
+   useEditAssignmentMarkMutation,
+   useDeleteAssignmentMarkMutation,
+} = enhancedAssignmentMarks;
