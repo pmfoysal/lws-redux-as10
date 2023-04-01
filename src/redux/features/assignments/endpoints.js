@@ -1,6 +1,6 @@
 import api from '../../api';
 
-const assignments = api.injectEndpoints({
+export default api.injectEndpoints({
    endpoints: builder => ({
       getAssignments: builder.query({
          query: () => '/assignments',
@@ -30,12 +30,3 @@ const assignments = api.injectEndpoints({
       }),
    }),
 });
-
-export default assignments;
-export const {
-   useGetAssignmentsQuery,
-   useGetAssignmentQuery,
-   useAddAssignmentMutation,
-   useEditAssignmentMutation,
-   useDeleteAssignmentMutation,
-} = assignments;

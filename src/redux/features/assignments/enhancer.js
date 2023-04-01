@@ -2,7 +2,7 @@ import assignments from './endpoints';
 
 const { updateQueryData } = assignments.util;
 
-assignments.enhanceEndpoints({
+const enhancedAssignments = assignments.enhanceEndpoints({
    endpoints: {
       addAssignment: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
@@ -53,3 +53,11 @@ assignments.enhanceEndpoints({
       },
    },
 });
+
+export const {
+   useGetAssignmentsQuery,
+   useGetAssignmentQuery,
+   useAddAssignmentMutation,
+   useEditAssignmentMutation,
+   useDeleteAssignmentMutation,
+} = enhancedAssignments;
