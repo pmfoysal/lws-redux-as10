@@ -17,12 +17,6 @@ const auth = createSlice({
          localStorage.setItem('token', accessToken);
          localStorage.setItem('user', JSON.stringify(user));
       },
-      signout: state => {
-         state.user = {};
-         state.token = '';
-         localStorage.removeItem('user');
-         localStorage.removeItem('token');
-      },
    },
    extraReducers: builder => {
       builder.addCase(signoutThunk.fulfilled, state => {
@@ -35,4 +29,4 @@ const auth = createSlice({
 });
 
 export default auth.reducer;
-export const { setAuth, signout } = auth.actions;
+export const { setAuth } = auth.actions;
