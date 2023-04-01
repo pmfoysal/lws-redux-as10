@@ -1,6 +1,6 @@
 import api from '../../api';
 
-const videos = api.injectEndpoints({
+export default api.injectEndpoints({
    endpoints: builder => ({
       getVideos: builder.query({
          query: () => '/videos',
@@ -30,6 +30,3 @@ const videos = api.injectEndpoints({
       }),
    }),
 });
-
-export default videos;
-export const { useGetVideosQuery, useGetVideoQuery, useAddVideoMutation, useEditVideoMutation, useDeleteVideoMutation } = videos;

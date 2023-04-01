@@ -2,7 +2,7 @@ import videos from './endpoints';
 
 const { updateQueryData } = videos.util;
 
-videos.enhanceEndpoints({
+const enhancedVideos = videos.enhanceEndpoints({
    endpoints: {
       addVideo: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
@@ -53,3 +53,6 @@ videos.enhanceEndpoints({
       },
    },
 });
+
+export const { useGetVideosQuery, useGetVideoQuery, useAddVideoMutation, useEditVideoMutation, useDeleteVideoMutation } =
+   enhancedVideos;
