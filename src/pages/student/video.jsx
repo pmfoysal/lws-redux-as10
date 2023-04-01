@@ -1,28 +1,33 @@
 import { Fragment } from 'react';
 import Head from '../../components/head';
+import PageLoader from '../../components/pageLoader';
 import VideoSidebar from '../../components/videoSidebar';
+import { useGetVideoQuery } from '../../redux/features/videos/enhancer';
+import getDate from '../../utilities/getDate';
 
 export default function Video() {
+   const { data, isLoading } = useGetVideoQuery({ id: 1 });
+
    return (
       <Fragment>
-         <Head title={`Video - `} desc={``} />
+         <Head title={`Video - ${data?.title}`} desc={`${data?.description}`} />
+         {isLoading ? <PageLoader /> : null}
          <section className='py-6 bg-primary'>
             <div className='mx-auto max-w-7xl px-5 lg:px-0'>
                <div className='grid grid-cols-3 gap-2 lg:gap-8'>
                   <div className='col-span-full w-full space-y-8 lg:col-span-2'>
                      <iframe
                         width='100%'
-                        className='aspect-video'
-                        src='https://www.youtube.com/embed/56zUkaXJnUA'
-                        title='Things I wish I knew as a Junior Web Developer - Sumit Saha - BASIS SoftExpo 2023'
-                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                        src={data?.url}
                         allowFullScreen
+                        className='aspect-video'
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                      ></iframe>
                      <div>
-                        <h1 className='text-lg font-semibold tracking-tight text-slate-100'>
-                           Things I wish I knew as a Junior Web Developer - Sumit Saha - BASIS SoftExpo 2023
-                        </h1>
-                        <h2 className=' pb-4 text-sm leading-[1.7142857] text-slate-400'>Uploaded on 23 February 2020</h2>
+                        <h1 className='text-lg font-semibold tracking-tight text-slate-100'>{data?.title}</h1>
+                        <h2 className=' pb-4 text-sm leading-[1.7142857] text-slate-400'>
+                           Uploaded on {getDate(data?.createdAt)}
+                        </h2>
                         <div className='flex gap-4'>
                            <a
                               href='#'
@@ -37,13 +42,7 @@ export default function Video() {
                               কুইজে অংশগ্রহণ করুন
                            </a>
                         </div>
-                        <p className='mt-4 text-sm text-slate-400 leading-6'>
-                           আপনারা যারা বিগিনার হিসেবে রিয়্যাক্ট জেস নিয়ে কাজ করা শুরু করেছেন, তারা রিয়্যাক্ট এর বেশ কিছু
-                           কনসেপ্ট ঠিক মতো আয়ত্ত না করতে পারার কারণে বিচিত্র কিছু সমস্যার সম্মুখীন হন এবং শেষ পর্যন্ত বুঝতে না
-                           পেরে হতাশ হয়ে পড়েন। তাদের জন্যই এই ভিডিওটি। এই ভিডিওতে আমি এমন ১০টি সমস্যার কথা তুলে ধরেছি যেগুলো
-                           বিগিনার হিসেবে আপনারা অহরহ সম্মুখীন হবেন। আশা করি ভিডিওটি দেখলে আপনাদের এই সমস্যাগুলো নিয়ে আর কনফিউশন
-                           থাকবেনা।
-                        </p>
+                        <p className='mt-4 text-sm text-slate-400 leading-6'>{data?.description}</p>
                      </div>
                   </div>
                   <VideoSidebar />
