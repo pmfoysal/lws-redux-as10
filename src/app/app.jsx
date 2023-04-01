@@ -1,14 +1,26 @@
-import { Suspense, lazy } from 'react';
 import Layout from '../layouts/layout';
+import { useDispatch } from 'react-redux';
+import AuthRoute from '../routes/authRoute';
 import Sitemap from '../pages/common/sitemap';
+import AdminRoute from '../routes/adminRoute';
 import { Route, Routes } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
 import { Admin, Student, Common } from '../pages';
 import PageLoader from '../components/pageLoader';
 import StudentRoute from '../routes/studentRoute';
-import AuthRoute from '../routes/authRoute';
+import { setAuth } from '../redux/features/others/auth';
+
 const Error = lazy(() => import('../pages/common/error'));
 
 export default function App() {
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      const accessToken = localStorage.getItem('token');
+      if (user?.email && accessToken) dispatch(setAuth({ user, accessToken }));
+   }, []);
+
    return (
       <Suspense fallback={<PageLoader />}>
          <Routes>
@@ -30,22 +42,22 @@ export default function App() {
                <Route path='admin'>
                   <Route index element={<AuthRoute page={<Admin.Signin />} />} />
                   <Route path='signin' element={<AuthRoute page={<Admin.Signin />} />} />
-                  <Route path='dashboard' element={<Admin.Dashboard />} />
+                  <Route path='dashboard' element={<AdminRoute page={<Admin.Dashboard />} />} />
 
-                  <Route path='videos' element={<Admin.VideoList />} />
-                  <Route path='video/add' element={<Admin.VideoAdd />} />
-                  <Route path='video/edit/:id_title' element={<Admin.VideoEdit />} />
+                  <Route path='videos' element={<AdminRoute page={<Admin.VideoList />} />} />
+                  <Route path='video/add' element={<AdminRoute page={<Admin.VideoAdd />} />} />
+                  <Route path='video/edit/:id_title' element={<AdminRoute page={<Admin.VideoEdit />} />} />
 
-                  <Route path='quizzes' element={<Admin.QuizList />} />
-                  <Route path='quiz/add' element={<Admin.QuizAdd />} />
-                  <Route path='quiz/edit/:id_title' element={<Admin.QuizEdit />} />
+                  <Route path='quizzes' element={<AdminRoute page={<Admin.QuizList />} />} />
+                  <Route path='quiz/add' element={<AdminRoute page={<Admin.QuizAdd />} />} />
+                  <Route path='quiz/edit/:id_title' element={<AdminRoute page={<Admin.QuizEdit />} />} />
 
-                  <Route path='assignments' element={<Admin.AssignmentList />} />
-                  <Route path='assignments/:id_title' element={<Admin.AssignmentList />} />
-                  <Route path='assignments/marks' element={<Admin.AssignmentMarks />} />
-                  <Route path='assignments/marks/:id_title' element={<Admin.AssignmentMarks />} />
-                  <Route path='assignment/add' element={<Admin.AssignmentAdd />} />
-                  <Route path='assignment/edit/:id_title' element={<Admin.AssignmentEdit />} />
+                  <Route path='assignments' element={<AdminRoute page={<Admin.AssignmentList />} />} />
+                  <Route path='assignments/:id_title' element={<AdminRoute page={<Admin.AssignmentList />} />} />
+                  <Route path='assignments/marks' element={<AdminRoute page={<Admin.AssignmentMarks />} />} />
+                  <Route path='assignments/marks/:id_title' element={<AdminRoute page={<Admin.AssignmentMarks />} />} />
+                  <Route path='assignment/add' element={<AdminRoute page={<Admin.AssignmentAdd />} />} />
+                  <Route path='assignment/edit/:id_title' element={<AdminRoute page={<Admin.AssignmentEdit />} />} />
                </Route>
             </Route>
             <Route path='*' element={<Error />} />
