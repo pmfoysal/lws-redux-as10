@@ -6,7 +6,7 @@ export default api.injectEndpoints({
          query: () => '/videos',
       }),
       getVideo: builder.query({
-         query: ({ id }) => `/videos/${id}`,
+         query: id => `/videos/${id}`,
       }),
       addVideo: builder.mutation({
          query: data => ({
@@ -23,7 +23,7 @@ export default api.injectEndpoints({
          }),
       }),
       deleteVideo: builder.mutation({
-         query: ({ id }) => ({
+         query: id => ({
             url: `/videos/${id}`,
             method: 'DELETE',
          }),
