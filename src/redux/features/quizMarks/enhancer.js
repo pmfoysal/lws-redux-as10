@@ -2,7 +2,7 @@ import quizMarks from './endpoints';
 
 const { updateQueryData } = quizMarks.util;
 
-quizMarks.enhanceEndpoints({
+const enhancedQuizMarks = quizMarks.enhanceEndpoints({
    endpoints: {
       addQuizMark: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
@@ -53,3 +53,11 @@ quizMarks.enhanceEndpoints({
       },
    },
 });
+
+export const {
+   useGetQuizMarksQuery,
+   useGetQuizMarkQuery,
+   useAddQuizMarkMutation,
+   useEditQuizMarkMutation,
+   useDeleteQuizMarkMutation,
+} = enhancedQuizMarks;
