@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import signoutThunk from '../redux/middlewares/signoutThunk';
 
 export default function Header() {
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const { user } = useSelector(store => store.auth);
 
    function handleSignout() {
       dispatch(signoutThunk()).then(({ payload: role }) => {
@@ -23,7 +24,7 @@ export default function Header() {
                <Link to='/leaderboard' className='font-bold'>
                   Leaderboard
                </Link>
-               <h2>Saad Hasan</h2>
+               <h2>{user.name}</h2>
                <button
                   className='flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium'
                   onClick={handleSignout}
