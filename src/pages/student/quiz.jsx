@@ -1,11 +1,11 @@
 import Error from '../common/error';
 import Head from '../../components/head';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import urlToId from '../../utilities/urlToId';
 import QuizItem from '../../components/quizItem';
 import PageLoader from '../../components/pageLoader';
 import { Fragment, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { selectQuizzes } from '../../redux/features/quizzes/selectors';
 import { useGetVideosQuery } from '../../redux/features/videos/enhancer';
 import { selectQuizMark } from '../../redux/features/quizMarks/selectors';
@@ -14,6 +14,7 @@ import { useAddQuizMarkMutation, useGetQuizMarksQuery } from '../../redux/featur
 
 export default function Quiz() {
    const markPerQuiz = 5;
+   const navigate = useNavigate();
    const { id_title } = useParams();
    const videosApi = useGetVideosQuery();
    const [video, setVideo] = useState({});
@@ -43,6 +44,8 @@ export default function Quiz() {
          totalWrong: quizzes.length - mark / markPerQuiz,
          totalMark: quizzes.length * markPerQuiz,
          mark,
+      }).then(result => {
+         if (result.data?.id !== undefined) navigate('/leaderboard');
       });
    }
 
