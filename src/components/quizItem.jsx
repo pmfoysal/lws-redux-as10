@@ -1,20 +1,16 @@
-export default function QuizItem() {
+export default function QuizItem({ index, question, options }) {
    return (
       <div className='quiz'>
-         <h4 className='question'>Quiz 1 - What is a Debounce function in JavaScript?</h4>
+         <h4 className='question'>
+            Quiz {index + 1} - {question}
+         </h4>
          <form className='quizOptions'>
-            <label htmlFor='option1_q1'>
-               <input type='checkbox' id='option1_q1' />A function that is called after a certain time interval
-            </label>
-            <label htmlFor='option2_q1'>
-               <input type='checkbox' id='option2_q1' />A function that is called after a certain time interval
-            </label>
-            <label htmlFor='option3_q1'>
-               <input type='checkbox' id='option3_q1' />A function that is called after a certain time interval
-            </label>
-            <label htmlFor='option4_q1'>
-               <input type='checkbox' id='option4_q1' />A function that is called after a certain time interval
-            </label>
+            {options?.map((option, oIndex) => (
+               <label key={`option-${oIndex}`}>
+                  <input type='checkbox' />
+                  {option?.option}
+               </label>
+            ))}
          </form>
       </div>
    );

@@ -201,3 +201,7 @@ textarea {
    pointer-events: none;
    cursor: default;
 }
+
+.q-submit {
+   color: black;
+}
