@@ -191,3 +191,7 @@ textarea {
 .icon {
    flex-shrink: 0;
 }
+
+.capitalize {
+   text-transform: capitalize;
+}
