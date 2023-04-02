@@ -1,25 +1,32 @@
 import Layout from '../layouts/layout';
-import { useDispatch } from 'react-redux';
 import AuthRoute from '../routes/authRoute';
 import Sitemap from '../pages/common/sitemap';
 import AdminRoute from '../routes/adminRoute';
-import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import { Admin, Student, Common } from '../pages';
 import PageLoader from '../components/pageLoader';
 import StudentRoute from '../routes/studentRoute';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../redux/features/others/auth';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { pushHistory } from '../redux/features/others/history';
 
 const Error = lazy(() => import('../pages/common/error'));
 
 export default function App() {
    const dispatch = useDispatch();
+   const { pathname } = useLocation();
+   const routes = useSelector(store => store.history.routes);
 
    useEffect(() => {
       const user = JSON.parse(localStorage.getItem('user') || '');
       const accessToken = localStorage.getItem('token');
       if (user?.email && accessToken) dispatch(setAuth({ user, accessToken }));
    }, []);
+
+   useEffect(() => {
+      if (routes.at(-1) !== pathname) dispatch(pushHistory(pathname));
+   }, [pathname]);
 
    return (
       <Suspense fallback={<PageLoader />}>

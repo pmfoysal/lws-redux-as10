@@ -12,14 +12,12 @@ import { HelmetProvider } from 'react-helmet-async';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-   <React.StrictMode>
-      <Provider store={store}>
-         <BrowserRouter>
-            <HelmetProvider>
-               <App />
-               <Message />
-            </HelmetProvider>
-         </BrowserRouter>
-      </Provider>
-   </React.StrictMode>
+   <Provider store={store}>
+      <BrowserRouter>
+         <HelmetProvider>
+            <App />
+            <Message />
+         </HelmetProvider>
+      </BrowserRouter>
+   </Provider>
 );
