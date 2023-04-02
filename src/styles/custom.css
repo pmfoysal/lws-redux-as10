@@ -147,3 +147,47 @@ textarea {
 .video-card.active {
    background-color: rgb(15, 23, 42);
 }
+
+.error-page {
+   width: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 90;
+   text-align: center;
+}
+
+.error-code {
+   font-size: 3rem;
+   color: violet;
+}
+
+.error-message {
+   margin-top: 2rem;
+   font-size: 20px;
+}
+
+.error-page .input-group {
+   margin-top: 2rem;
+   display: flex;
+   justify-content: center;
+}
+
+.error-page .input-group button {
+   padding-left: 1.25rem;
+   padding-right: 1.25rem;
+   height: 2.5rem;
+   white-space: nowrap;
+}
+
+.error-page .back-button {
+   background-color: olivedrab;
+}
+
+.error-page .back-button:hover {
+   opacity: 0.85;
+}
+
+.icon {
+   flex-shrink: 0;
+}
