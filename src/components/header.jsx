@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import signoutThunk from '../redux/middlewares/signoutThunk';
 
 export default function Header() {
@@ -21,8 +21,8 @@ export default function Header() {
                <img className='h-10' src='/assets/icons/learningportal.svg' />
             </Link>
             <div className='flex items-center gap-3'>
-               <Link to='/leaderboard' className='font-bold'>
-                  Leaderboard
+               <Link to={user.role === 'admin' ? '/admin/dashboard' : '/leaderboard'} className='font-bold'>
+                  {user.role === 'admin' ? 'Dashboard' : 'Leaderboard'}
                </Link>
                <h2>{user.name}</h2>
                <button
