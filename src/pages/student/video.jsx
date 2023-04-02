@@ -1,4 +1,5 @@
 import Head from '../../components/head';
+import { useSelector } from 'react-redux';
 import getDate from '../../utilities/getDate';
 import urlToId from '../../utilities/urlToId';
 import { useParams, Link } from 'react-router-dom';
@@ -8,8 +9,10 @@ import stringToUrl from '../../utilities/stringToUrl';
 import VideoSidebar from '../../components/videoSidebar';
 import { selectQuizzes } from '../../redux/features/quizzes/selectors';
 import { useGetVideosQuery } from '../../redux/features/videos/enhancer';
+import { selectQuizMark } from '../../redux/features/quizMarks/selectors';
 import { useGetQuizzesQuery } from '../../redux/features/quizzes/enhancer';
 import { selectAssignment } from '../../redux/features/assignments/selectors';
+import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { useGetAssignmentsQuery } from '../../redux/features/assignments/enhancer';
 
 export default function Video() {
@@ -17,8 +20,11 @@ export default function Video() {
    const videosApi = useGetVideosQuery();
    const [video, setVideo] = useState({});
    const quizzesApi = useGetQuizzesQuery();
+   const quizMarksApi = useGetQuizMarksQuery();
    const [hasQuiz, setHasQuiz] = useState(false);
    const assignmentsApi = useGetAssignmentsQuery();
+   const { user } = useSelector(store => store.auth);
+   const [hasQuizMark, setHasQuizMark] = useState({});
    const [hasAssignment, setHasAssignment] = useState(false);
 
    useEffect(() => {
@@ -43,6 +49,16 @@ export default function Video() {
          }
       }
    }, [quizzesApi, assignmentsApi, video]);
+
+   useEffect(() => {
+      if (video.id !== undefined) {
+         if (quizMarksApi.data?.length) {
+            const temp = selectQuizMark(quizMarksApi.data, user.id, video.id);
+            if (temp?.id !== undefined) setHasQuizMark(true);
+            else setHasQuizMark(false);
+         } else setHasQuizMark(false);
+      } else setHasQuizMark(false);
+   }, [quizMarksApi, video, user]);
 
    return (
       <Fragment>
@@ -74,12 +90,20 @@ export default function Video() {
                               </Link>
                            ) : null}
                            {hasQuiz ? (
-                              <Link
-                                 to={`/quiz/${video.id}_${stringToUrl(video.title)}`}
-                                 className='px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary'
-                              >
-                                 কুইজে অংশগ্রহণ করুন
-                              </Link>
+                              <Fragment>
+                                 {hasQuizMark ? (
+                                    <p className='px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary'>
+                                       কুইজে অংশগ্রহণ করেছেন
+                                    </p>
+                                 ) : (
+                                    <Link
+                                       to={`/quiz/${video.id}_${stringToUrl(video.title)}`}
+                                       className='px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary'
+                                    >
+                                       কুইজে অংশগ্রহণ করুন
+                                    </Link>
+                                 )}
+                              </Fragment>
                            ) : null}
                         </div>
                         <p className='mt-4 text-sm text-slate-400 leading-6'>{video.description}</p>
