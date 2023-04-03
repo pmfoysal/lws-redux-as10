@@ -1,4 +1,5 @@
 import assignmentMarks from './endpoints';
+import message from '../../../utilities/message';
 
 const { updateQueryData } = assignmentMarks.util;
 
@@ -8,8 +9,14 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(updateQueryData('getAssignmentMarks', undefined, draft => draft.push(result)));
-            } catch (error) {}
+               dispatch(
+                  updateQueryData('getAssignmentMarks', undefined, draft => {
+                     draft.push(result);
+                  })
+               );
+            } catch (error) {
+               message.error(error.message);
+            }
          },
       },
       editAssignmentMark: {

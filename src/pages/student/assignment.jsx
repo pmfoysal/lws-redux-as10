@@ -19,9 +19,9 @@ export default function Assignment() {
    const [assignment, setAssignment] = useState({});
    const { user } = useSelector(store => store.auth);
    const [assignmentMark, setAssignmentMark] = useState({});
-   const assignmentsApi = useGetAssignmentsQuery(null, { skip: !id_title });
+   const assignmentsApi = useGetAssignmentsQuery(undefined, { skip: !id_title });
    const [submitAssignment, submitAssignmentApi] = useAddAssignmentMarkMutation();
-   const assignmentMarksApi = useGetAssignmentMarksQuery(null, { skip: !id_title });
+   const assignmentMarksApi = useGetAssignmentMarksQuery(undefined, { skip: !id_title });
 
    function handleSubmit() {
       if (assignment.id !== undefined && repoUrl) {

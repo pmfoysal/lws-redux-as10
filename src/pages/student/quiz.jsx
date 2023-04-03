@@ -23,7 +23,7 @@ export default function Quiz() {
    const { user } = useSelector(store => store.auth);
    const [hasQuizMark, setHasQuizMark] = useState({});
    const [submitQuiz, submitQuizApi] = useAddQuizMarkMutation();
-   const quizzesApi = useGetQuizzesQuery(null, { skip: !id_title });
+   const quizzesApi = useGetQuizzesQuery(undefined, { skip: !id_title });
 
    function calculateMark() {
       return quizzes.reduce((mark, quiz) => {
