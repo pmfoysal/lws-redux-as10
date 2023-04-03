@@ -11,11 +11,11 @@ const modalStyle = {
    borderRadius: '1.25rem',
    // bgcolor: 'background.paper',
    bgcolor: '#0e192f',
-   border: '2px solid #000',
+   border: '2px solid #18294e',
    boxShadow: 24,
 };
 
-export default function Modal({ isOpen, setIsOpen, type, message, onClick }) {
+export default function Modal({ isOpen, setIsOpen, type, message, onClick, isLoading }) {
    const icons = {
       delete: (
          <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
@@ -76,7 +76,9 @@ export default function Modal({ isOpen, setIsOpen, type, message, onClick }) {
                   <div className={`modal-icon ${type}`}>{icons[type]}</div>
                   <p className='modal-message'>{message}</p>
                   <div className='modal-buttons'>
-                     <button onClick={onClick}>Yes !</button>
+                     <button onClick={onClick} disabled={isLoading}>
+                        {isLoading ? `${type === 'delete' ? 'delet' : type}ing...` : 'Yes !'}
+                     </button>
                   </div>
                </div>
             </Box>

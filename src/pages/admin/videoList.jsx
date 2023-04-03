@@ -9,9 +9,13 @@ export default function VideoList() {
    const videosApi = useGetVideosQuery();
    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
    const [deleteVideo, deleteVideoApi] = useDeleteVideoMutation();
-   const [deleteModal, setDeleteModal] = useState({ title: '', id: '' });
+   const [deleteModalData, setDeleteModal] = useState({ title: '', id: '' });
 
-   function handleDelete() {}
+   function handleDelete() {
+      deleteVideo(deleteModalData.id).then(() => {
+         setIsDeleteOpen(false);
+      });
+   }
 
    return (
       <Fragment>
@@ -81,10 +85,12 @@ export default function VideoList() {
             </div>
          </section>
          <Modal
-            isOpen={isDeleteOpen}
-            setIsOpen={setIsDeleteOpen}
             type='delete'
-            message={`Do you want to delete "${deleteModal.title}" video?`}
+            isOpen={isDeleteOpen}
+            onClick={handleDelete}
+            setIsOpen={setIsDeleteOpen}
+            isLoading={deleteVideoApi.isLoading}
+            message={`Do you want to delete "${deleteModalData.title}" video?`}
          />
       </Fragment>
    );
