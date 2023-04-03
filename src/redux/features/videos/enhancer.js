@@ -1,4 +1,5 @@
 import videos from './endpoints';
+import message from '../../../utilities/message';
 
 const { updateQueryData } = videos.util;
 

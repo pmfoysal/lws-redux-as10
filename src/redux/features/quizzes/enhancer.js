@@ -1,4 +1,5 @@
 import quizzes from './endpoints';
+import message from '../../../utilities/message';
 
 const { updateQueryData } = quizzes.util;
 
