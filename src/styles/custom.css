@@ -236,3 +236,75 @@ textarea {
 .table-td {
    padding-left: 0;
 }
+
+.modal {
+   padding: 1rem 1.25rem;
+}
+
+.modal-head {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   color: rgba(255, 255, 255, 0.9);
+   font-weight: 600;
+   text-transform: capitalize;
+   font-size: 20px;
+}
+
+.modal-head svg {
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.modal-message {
+   color: rgba(255, 255, 255, 0.85);
+   padding: 1rem 0;
+}
+
+.modal-buttons {
+   display: flex;
+   justify-content: flex-end;
+   gap: 1rem;
+   margin-top: 0.5rem;
+}
+
+.modal-buttons button {
+   height: 36px;
+   padding: 0 1.5rem;
+   background-color: rgb(124, 58, 237);
+   border-radius: 6px;
+}
+
+.modal-buttons button:hover {
+   opacity: 0.85;
+}
+
+.modal-icon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding-top: 1rem;
+   padding-bottom: 0.5rem;
+}
+
+.modal-icon svg {
+   height: 70px;
+   width: 70px;
+   border-radius: 100%;
+   padding: 1rem;
+}
+
+.modal-icon.delete svg {
+   background-color: rgba(255, 0, 0, 0.2);
+   color: rgb(255, 0, 0);
+}
+
+.modal-icon.add svg {
+   background-color: rgba(30, 144, 255, 0.2);
+   color: rgb(30, 144, 255);
+}
+
+.modal-icon.edit svg {
+   background-color: rgba(124, 58, 237, 0.2);
+   color: rgb(124, 58, 237);
+}

@@ -1,12 +1,15 @@
-import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Head from '../../components/head';
+import { Fragment, useState } from 'react';
+import Modal from '../../components/modal';
 import PageLoader from '../../components/pageLoader';
 import { useDeleteVideoMutation, useGetVideosQuery } from '../../redux/features/videos/enhancer';
-import { Link } from 'react-router-dom';
 
 export default function VideoList() {
    const videosApi = useGetVideosQuery();
+   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
    const [deleteVideo, deleteVideoApi] = useDeleteVideoMutation();
+   const [deleteModal, setDeleteModal] = useState({ title: '', id: '' });
 
    function handleDelete() {}
 
@@ -44,6 +47,10 @@ export default function VideoList() {
                                        strokeWidth='1.5'
                                        stroke='currentColor'
                                        className='w-6 h-6 hover:text-red-500 cursor-pointer transition-all'
+                                       onClick={() => {
+                                          setIsDeleteOpen(true);
+                                          setDeleteModal({ id: video.id, title: video.title });
+                                       }}
                                     >
                                        <path
                                           strokeLinecap='round'
@@ -73,6 +80,12 @@ export default function VideoList() {
                </div>
             </div>
          </section>
+         <Modal
+            isOpen={isDeleteOpen}
+            setIsOpen={setIsDeleteOpen}
+            type='delete'
+            message={`Do you want to delete "${deleteModal.title}" video?`}
+         />
       </Fragment>
    );
 }
