@@ -1,4 +1,5 @@
 import quizMarks from './endpoints';
+import message from '../../../utilities/message';
 
 const { updateQueryData } = quizMarks.util;
 
@@ -8,8 +9,14 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(updateQueryData('getQuizMarks', undefined, draft => draft.push(result)));
-            } catch (error) {}
+               dispatch(
+                  updateQueryData('getQuizMarks', undefined, draft => {
+                     draft.push(result);
+                  })
+               );
+            } catch (error) {
+               message.error(error.message);
+            }
          },
       },
       editQuizMark: {
