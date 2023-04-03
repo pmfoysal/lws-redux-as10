@@ -8,13 +8,13 @@ import { useDeleteVideoMutation, useGetVideosQuery } from '../../redux/features/
 
 export default function VideoList() {
    const videosApi = useGetVideosQuery();
-   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+   const [isModalOpen, setIsModalOpen] = useState(false);
    const [deleteVideo, deleteVideoApi] = useDeleteVideoMutation();
-   const [deleteModalData, setDeleteModal] = useState({ title: '', id: '' });
+   const [ModalData, setModalData] = useState({ title: '', id: '' });
 
    function handleDelete() {
-      deleteVideo(deleteModalData.id).then(() => {
-         setIsDeleteOpen(false);
+      deleteVideo(ModalData.id).then(() => {
+         setIsModalOpen(false);
       });
    }
 
@@ -53,8 +53,8 @@ export default function VideoList() {
                                        stroke='currentColor'
                                        className='w-6 h-6 hover:text-red-500 cursor-pointer transition-all'
                                        onClick={() => {
-                                          setIsDeleteOpen(true);
-                                          setDeleteModal({ id: video.id, title: video.title });
+                                          setIsModalOpen(true);
+                                          setModalData({ id: video.id, title: video.title });
                                        }}
                                     >
                                        <path
@@ -89,11 +89,11 @@ export default function VideoList() {
          </section>
          <Modal
             type='delete'
-            isOpen={isDeleteOpen}
+            isOpen={isModalOpen}
             onClick={handleDelete}
-            setIsOpen={setIsDeleteOpen}
+            setIsOpen={setIsModalOpen}
             isLoading={deleteVideoApi.isLoading}
-            message={`Do you want to delete "${deleteModalData.title}" video?`}
+            message={`Do you want to delete "${ModalData.title}" video?`}
          />
       </Fragment>
    );

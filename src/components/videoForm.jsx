@@ -1,3 +1,4 @@
+import Modal from './modal';
 import urlToId from '../utilities/urlToId';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { useAddVideoMutation, useEditVideoMutation, useGetVideoQuery } from '../
 export default function VideoForm({ mode }) {
    const navigate = useNavigate();
    const { id_title } = useParams();
+   const [isModalOpen, setIsModalOpen] = useState(false);
    const [addVideo, addVideoApi] = useAddVideoMutation();
    const [editVideo, editVideoApi] = useEditVideoMutation();
    const { data: video } = useGetVideoQuery(urlToId(id_title), { skip: !id_title || mode !== 'edit' });
@@ -18,6 +20,10 @@ export default function VideoForm({ mode }) {
 
    function handleSubmit(event) {
       event.preventDefault();
+      setIsModalOpen(true);
+   }
+
+   function handleVideo() {
       const payload = { title, description, url, views, duration };
       if (mode === 'add') {
          payload.createdAt = new Date().toISOString();
@@ -94,11 +100,19 @@ export default function VideoForm({ mode }) {
          </div>
          <button
             type='submit'
-            disabled={editVideoApi.isLoading || addVideoApi.isLoading}
+            disabled={addVideoApi.isLoading || editVideoApi.isLoading}
             className='mt-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500'
          >
             {mode === 'add' ? '+ Add' : 'Update'}
          </button>
+         <Modal
+            type={mode}
+            isOpen={isModalOpen}
+            onClick={handleVideo}
+            setIsOpen={setIsModalOpen}
+            isLoading={addVideoApi.isLoading || editVideoApi.isLoading}
+            message={`Do you want to ${mode} this video?`}
+         />
       </form>
    );
 }
