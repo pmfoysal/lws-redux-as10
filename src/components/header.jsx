@@ -17,7 +17,7 @@ export default function Header() {
    return (
       <nav className='shadow-md'>
          <div className='max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3'>
-            <Link to='/'>
+            <Link to={user.role === 'admin' ? '/admin/dashboard' : '/video'}>
                <img className='h-10' src='/assets/icons/learningportal.svg' />
             </Link>
             <div className='flex items-center gap-3'>

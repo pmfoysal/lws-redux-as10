@@ -8,15 +8,31 @@ import PageLoader from '../components/pageLoader';
 import StudentRoute from '../routes/studentRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../redux/features/others/auth';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { pushHistory } from '../redux/features/others/history';
+import { useGetUserQuery } from '../redux/features/users/endpoints';
+import signoutThunk from '../redux/middlewares/signoutThunk';
 
 const Error = lazy(() => import('../pages/common/error'));
 
 export default function App() {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
    const { pathname } = useLocation();
    const routes = useSelector(store => store.history.routes);
+   const prevUser = JSON.parse(localStorage.getItem('user') || '{}');
+   const userApi = useGetUserQuery(prevUser?.id, { skip: prevUser?.id === undefined });
+
+   useEffect(() => {
+      if (!userApi.isLoading) {
+         if (userApi.data?.id === undefined && userApi.error?.status === 404) {
+            dispatch(signoutThunk()).then(({ payload: role }) => {
+               if (role === 'admin') navigate('/admin/signin');
+               else navigate('/signin');
+            });
+         }
+      }
+   }, [userApi]);
 
    useEffect(() => {
       const user = JSON.parse(localStorage.getItem('user') || '{}');

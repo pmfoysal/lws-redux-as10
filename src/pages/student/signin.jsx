@@ -15,7 +15,7 @@ export default function Signin() {
                </div>
                <SigninForm />
                <Link to='/signup' className='text-sm font-medium text-violet-600 hover:text-violet-500 already-text'>
-                  Already have an account?
+                  Don't have an account?
                </Link>
             </div>
          </section>

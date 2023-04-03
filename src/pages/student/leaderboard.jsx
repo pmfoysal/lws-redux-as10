@@ -38,8 +38,8 @@ export default function Leaderboard() {
          }));
          const usersRankTemp = getUsersWithRank(tempUsers);
          const userRankTemp = getCurrentUserRank(usersRankTemp, user.id);
-         setUserRank(userRankTemp);
-         setUsersRank(usersRankTemp);
+         setUserRank(userRankTemp || {});
+         setUsersRank(usersRankTemp || []);
       }
    }, [usersApi, quizMarksApi, assignmentMarksApi, user]);
 

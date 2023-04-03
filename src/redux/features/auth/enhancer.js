@@ -1,4 +1,5 @@
 import auth from './endpoints';
+import users from '../users/endpoints';
 import { setAuth } from '../others/auth';
 import message from '../../../utilities/message';
 
@@ -19,6 +20,7 @@ const enhancedAuth = auth.enhanceEndpoints({
             try {
                const { data: result } = await queryFulfilled;
                dispatch(setAuth(result));
+               dispatch(users.util.updateQueryData('getUsers', undefined, draft => draft.push(result.user)));
             } catch (error) {
                message.error(error.error.data);
             }
