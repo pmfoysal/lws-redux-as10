@@ -15,7 +15,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message);
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -40,6 +40,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
             } catch (error) {
                updatedGetAssignmentMark.undo();
                updatedGetAssignmentMarks.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -55,6 +56,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetAssignmentMarks.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },

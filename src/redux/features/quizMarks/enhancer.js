@@ -15,7 +15,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message);
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -40,6 +40,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
             } catch (error) {
                updatedGetQuizMark.undo();
                updatedGetQuizMarks.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -55,6 +56,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetQuizMark.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },

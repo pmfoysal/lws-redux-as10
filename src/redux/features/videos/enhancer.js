@@ -8,8 +8,14 @@ const enhancedVideos = videos.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(updateQueryData('getVideos', undefined, draft => draft.push(result)));
-            } catch (error) {}
+               dispatch(
+                  updateQueryData('getVideos', undefined, draft => {
+                     draft.push(result);
+                  })
+               );
+            } catch (error) {
+               message.error(error.message || error.error.data);
+            }
          },
       },
       editVideo: {
@@ -33,6 +39,7 @@ const enhancedVideos = videos.enhanceEndpoints({
             } catch (error) {
                updatedGetVideo.undo();
                updatedGetVideos.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -48,6 +55,7 @@ const enhancedVideos = videos.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetVideos.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },

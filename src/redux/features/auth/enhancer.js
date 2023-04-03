@@ -11,7 +11,7 @@ const enhancedAuth = auth.enhanceEndpoints({
                const { data: result } = await queryFulfilled;
                dispatch(setAuth(result));
             } catch (error) {
-               message.error(error.error.data);
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -20,9 +20,13 @@ const enhancedAuth = auth.enhanceEndpoints({
             try {
                const { data: result } = await queryFulfilled;
                dispatch(setAuth(result));
-               dispatch(users.util.updateQueryData('getUsers', undefined, draft => draft.push(result.user)));
+               dispatch(
+                  users.util.updateQueryData('getUsers', undefined, draft => {
+                     draft.push(result.user);
+                  })
+               );
             } catch (error) {
-               message.error(error.error.data);
+               message.error(error.message || error.error.data);
             }
          },
       },

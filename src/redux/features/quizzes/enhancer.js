@@ -8,8 +8,14 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(updateQueryData('getQuizzes', undefined, draft => draft.push(result)));
-            } catch (error) {}
+               dispatch(
+                  updateQueryData('getQuizzes', undefined, draft => {
+                     draft.push(result);
+                  })
+               );
+            } catch (error) {
+               message.error(error.message || error.error.data);
+            }
          },
       },
       editQuiz: {
@@ -33,6 +39,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
             } catch (error) {
                updatedGetQuiz.undo();
                updatedGetQuizzes.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -48,6 +55,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetQuizzes.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },

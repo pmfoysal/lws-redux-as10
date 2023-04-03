@@ -8,8 +8,14 @@ const enhancedAssignments = assignments.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
                const { data: result } = await queryFulfilled;
-               dispatch(updateQueryData('getAssignments', undefined, draft => draft.push(result)));
-            } catch (error) {}
+               dispatch(
+                  updateQueryData('getAssignments', undefined, draft => {
+                     draft.push(result);
+                  })
+               );
+            } catch (error) {
+               message.error(error.message || error.error.data);
+            }
          },
       },
       editAssignment: {
@@ -33,6 +39,7 @@ const enhancedAssignments = assignments.enhanceEndpoints({
             } catch (error) {
                updatedGetAssignment.undo();
                updatedGetAssignments.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
@@ -48,6 +55,7 @@ const enhancedAssignments = assignments.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetAssignments.undo();
+               message.error(error.message || error.error.data);
             }
          },
       },
