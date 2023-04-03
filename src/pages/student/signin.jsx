@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Head from '../../components/head';
 import SigninForm from '../../components/signinForm';
 
@@ -13,6 +14,9 @@ export default function Signin() {
                   <h2 className='mt-6 text-center text-3xl font-extrabold text-slate-100'>Sign in to Student Account</h2>
                </div>
                <SigninForm />
+               <Link to='/signup' className='text-sm font-medium text-violet-600 hover:text-violet-500 already-text'>
+                  Already have an account?
+               </Link>
             </div>
          </section>
       </Fragment>

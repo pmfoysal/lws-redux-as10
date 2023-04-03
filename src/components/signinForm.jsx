@@ -57,8 +57,7 @@ export default function SigninForm() {
                />
             </div>
          </div>
-
-         <div className='flex items-center justify-end'>
+         <div className='flex items-center justify-end forget-text'>
             <div className='text-sm'>
                <Link to='/forget-password' className='font-medium text-violet-600 hover:text-violet-500'>
                   Forgot your password?
