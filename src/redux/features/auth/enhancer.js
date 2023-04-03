@@ -14,6 +14,16 @@ const enhancedAuth = auth.enhanceEndpoints({
             }
          },
       },
+      signup: {
+         onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
+            try {
+               const { data: result } = await queryFulfilled;
+               dispatch(setAuth(result));
+            } catch (error) {
+               message.error(error.error.data);
+            }
+         },
+      },
    },
 });
 

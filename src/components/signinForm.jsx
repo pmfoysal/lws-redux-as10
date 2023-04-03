@@ -12,7 +12,10 @@ export default function SigninForm() {
    function handleSignin(event) {
       event.preventDefault();
       signin({ email, password }).then(({ data }) => {
-         if (data?.accessToken) navigate('/video');
+         if (data?.accessToken) {
+            if (data?.user?.role === 'admin') navigate('/admin/dashboard');
+            else navigate('/video');
+         }
       });
    }
 

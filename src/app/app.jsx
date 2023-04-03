@@ -19,7 +19,7 @@ export default function App() {
    const routes = useSelector(store => store.history.routes);
 
    useEffect(() => {
-      const user = JSON.parse(localStorage.getItem('user') || '');
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
       const accessToken = localStorage.getItem('token');
       if (user?.email && accessToken) dispatch(setAuth({ user, accessToken }));
    }, []);

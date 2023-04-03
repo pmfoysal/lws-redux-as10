@@ -48,6 +48,13 @@
       "role": "student",
       "name": "Arif",
       "id": 7
+    },
+    {
+      "email": "pmfoysal@gmail.com",
+      "password": "$2a$10$n49zKgnNcB8LLAXTH9yb4.aIP2NZ23f5eeU5hjsgGRCmeDFZLGkOu",
+      "name": "Foysal Ahmmed",
+      "role": "student",
+      "id": 8
     }
   ],
   "videos": [
@@ -62,7 +69,7 @@
     },
     {
       "id": 2,
-      "title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "description": "JavaScript Tips and Tricks - JavaScript Job Interview Questions - Bangla Tutorial \nIn this video, I have shown 8 more JavaScript pro tips that will make a JavaScript Developer's life easier.",
       "url": "https://www.youtube.com/embed/E9_R88eKcBM",
       "views": "91.2K",
@@ -82,7 +89,7 @@
       "id": 2,
       "title": "Assignment 2 - Implement Best Practices",
       "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "totalMark": 100
     }
   ],
@@ -94,23 +101,23 @@
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
       "options": [
         {
-          "id": "1",
-          "option": "A function that is called after a certain time interval",
+          "id": 1,
+          "option": "A function that is called after a certain time interval 1",
           "isCorrect": true
         },
         {
-          "id": "2",
-          "option": "A function that is called after a certain time interval",
+          "id": 1,
+          "option": "A function that is called after a certain time interval 2",
           "isCorrect": false
         },
         {
           "id": 3,
-          "option": "A function that is called after a certain time interval",
+          "option": "A function that is called after a certain time interval 3",
           "isCorrect": false
         },
         {
           "id": 4,
-          "option": "A function that is called after a certain time interval",
+          "option": "A function that is called after a certain time interval 4",
           "isCorrect": false
         }
       ]
@@ -122,12 +129,12 @@
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
       "options": [
         {
-          "id": "1",
+          "id": 1,
           "option": "A search bar where the results are displayed as you type.",
           "isCorrect": true
         },
         {
-          "id": "2",
+          "id": 2,
           "option": "A button that performs an action when clicked.",
           "isCorrect": false
         },
@@ -147,7 +154,7 @@
       "id": 3,
       "question": "What is the difference between null and undefined in JavaScript?",
       "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "options": [
         {
           "id": 1,
@@ -189,7 +196,7 @@
       "id": 2,
       "student_id": 2,
       "student_name": "Saad Hasan",
-      "assignment_id": 1,
+      "assignment_id": 2,
       "title": "Assignment 2 - Implement Best Practices",
       "createdAt": "2021-01-15T15:17:01.727Z",
       "totalMark": 100,
@@ -239,7 +246,7 @@
       "student_id": 3,
       "student_name": "Akash Ahmed",
       "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "totalQuiz": 1,
       "totalCorrect": 1,
       "totalWrong": 0,

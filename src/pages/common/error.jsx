@@ -1,8 +1,8 @@
+import Head from '../../components/head';
 import { useDispatch } from 'react-redux';
 import { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import signoutThunk from '../../redux/middlewares/signoutThunk';
-import Head from '../../components/head';
 
 export default function Error({ code = 404, role = '' }) {
    const navigate = useNavigate();
