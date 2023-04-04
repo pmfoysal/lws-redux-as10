@@ -221,15 +221,29 @@ textarea {
    grid-template-columns: repeat(11, 1fr);
 }
 
-.video-table-row * {
+.assignment-table-row {
+   display: grid;
+   grid-template-columns: repeat(10, 1fr);
+}
+
+table tr * {
    white-space: nowrap;
    text-overflow: ellipsis;
    overflow: hidden;
 }
 
-.video-table-row th:not(:last-child),
-.video-table-row td:not(:last-child) {
+.video-table-row th:nth-child(1),
+.video-table-row td:nth-child(1),
+.video-table-row th:nth-child(2),
+.video-table-row td:nth-child(2) {
    grid-column: span 5;
+}
+
+.assignment-table-row th:nth-child(1),
+.assignment-table-row td:nth-child(1),
+.assignment-table-row th:nth-child(2),
+.assignment-table-row td:nth-child(2) {
+   grid-column: span 4;
 }
 
 .table-th,
