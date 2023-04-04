@@ -1,12 +1,22 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Head from '../../components/head';
+import { Fragment, useState } from 'react';
+import Modal from '../../components/modal';
 import PageLoader from '../../components/pageLoader';
 import stringToUrl from '../../utilities/stringToUrl';
-import { useGetAssignmentsQuery } from '../../redux/features/assignments/enhancer';
+import { useDeleteAssignmentMutation, useGetAssignmentsQuery } from '../../redux/features/assignments/enhancer';
 
 export default function AssignmentList() {
    const assignmentsApi = useGetAssignmentsQuery();
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [ModalData, setModalData] = useState({ title: '', id: '' });
+   const [deleteAssignment, deleteAssignmentApi] = useDeleteAssignmentMutation();
+
+   function handleDelete() {
+      deleteAssignment(ModalData.id).then(() => {
+         setIsModalOpen(false);
+      });
+   }
 
    return (
       <Fragment>
@@ -44,6 +54,10 @@ export default function AssignmentList() {
                                        strokeWidth='1.5'
                                        stroke='currentColor'
                                        className='w-6 h-6 hover:text-red-500 cursor-pointer transition-all'
+                                       onClick={() => {
+                                          setIsModalOpen(true);
+                                          setModalData({ id: item.id, title: item.title });
+                                       }}
                                     >
                                        <path
                                           strokeLinecap='round'
@@ -75,6 +89,14 @@ export default function AssignmentList() {
                </div>
             </div>
          </section>
+         <Modal
+            type='delete'
+            isOpen={isModalOpen}
+            onClick={handleDelete}
+            setIsOpen={setIsModalOpen}
+            isLoading={deleteAssignmentApi.isLoading}
+            message={`Do you want to delete "${ModalData.title}" assignment?`}
+         />
       </Fragment>
    );
 }
