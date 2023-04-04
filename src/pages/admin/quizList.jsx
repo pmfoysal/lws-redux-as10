@@ -1,12 +1,22 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Head from '../../components/head';
+import Modal from '../../components/modal';
+import { Fragment, useState } from 'react';
 import PageLoader from '../../components/pageLoader';
-import { useGetQuizzesQuery } from '../../redux/features/quizzes/enhancer';
 import stringToUrl from '../../utilities/stringToUrl';
+import { useDeleteQuizMutation, useGetQuizzesQuery } from '../../redux/features/quizzes/enhancer';
 
 export default function QuizList() {
    const quizzesApi = useGetQuizzesQuery();
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [deleteQuiz, deleteQuizApi] = useDeleteQuizMutation();
+   const [modalData, setModalData] = useState({ title: '', id: '' });
+
+   function handleDelete() {
+      deleteQuiz(modalData.id).then(() => {
+         setIsModalOpen(false);
+      });
+   }
 
    return (
       <Fragment>
@@ -42,6 +52,10 @@ export default function QuizList() {
                                        strokeWidth='1.5'
                                        stroke='currentColor'
                                        className='w-6 h-6 hover:text-red-500 cursor-pointer transition-all'
+                                       onClick={() => {
+                                          setIsModalOpen(true);
+                                          setModalData({ id: item.id, title: item.question });
+                                       }}
                                     >
                                        <path
                                           strokeLinecap='round'
@@ -73,6 +87,14 @@ export default function QuizList() {
                </div>
             </div>
          </section>
+         <Modal
+            type='delete'
+            isOpen={isModalOpen}
+            onClick={handleDelete}
+            setIsOpen={setIsModalOpen}
+            isLoading={deleteQuizApi.isLoading}
+            message={`Do you want to delete "${modalData.title}" quiz?`}
+         />
       </Fragment>
    );
 }
