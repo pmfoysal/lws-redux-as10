@@ -1,4 +1,5 @@
 import Modal from './modal';
+import Error from '../pages/common/error';
 import urlToId from '../utilities/urlToId';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,7 +11,7 @@ export default function VideoForm({ mode }) {
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [addVideo, addVideoApi] = useAddVideoMutation();
    const [editVideo, editVideoApi] = useEditVideoMutation();
-   const { data: video } = useGetVideoQuery(urlToId(id_title), { skip: !id_title || mode !== 'edit' });
+   const { data: video, isLoading } = useGetVideoQuery(urlToId(id_title), { skip: !id_title || mode !== 'edit' });
 
    const [url, setUrl] = useState('');
    const [title, setTitle] = useState('');
@@ -31,10 +32,12 @@ export default function VideoForm({ mode }) {
             navigate('/admin/videos');
          });
       } else if (mode === 'edit') {
-         payload.id = video.id;
-         editVideo(payload).then(() => {
-            navigate('/admin/videos');
-         });
+         if (video?.id !== undefined) {
+            payload.id = video.id;
+            editVideo(payload).then(() => {
+               navigate('/admin/videos');
+            });
+         }
       }
    }
 
@@ -47,6 +50,12 @@ export default function VideoForm({ mode }) {
          setDescription(video.description);
       }
    }, [video, mode]);
+
+   if (mode === 'edit' && !isLoading) {
+      if (video?.id === undefined) {
+         return <Error />;
+      }
+   }
 
    return (
       <form className='add-form' onSubmit={handleSubmit}>
