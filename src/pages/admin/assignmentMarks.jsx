@@ -1,12 +1,16 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Head from '../../components/head';
+import { Fragment, useState } from 'react';
+import Modal from '../../components/modal';
 import PageLoader from '../../components/pageLoader';
 import getDateTime from '../../utilities/getDateTime';
-import { useGetAssignmentMarksQuery } from '../../redux/features/assignmentMarks/enhancer';
+import { useEditAssignmentMarkMutation, useGetAssignmentMarksQuery } from '../../redux/features/assignmentMarks/enhancer';
 
 export default function AssignmentMarks() {
+   const [isModalOpen, setIsModalOpen] = useState(false);
    const assignmentMarksApi = useGetAssignmentMarksQuery();
+   const [editMark, editMarkApi] = useEditAssignmentMarkMutation();
+   const [modalData, setModalData] = useState({ id: '', value: '', title: '', name: '' });
 
    function getStats(assignmentMarks) {
       const stats = {};
@@ -14,6 +18,26 @@ export default function AssignmentMarks() {
       stats.pending = assignmentMarks.filter(item => item.status === 'pending').length;
       stats.published = assignmentMarks.filter(item => item.status === 'published').length;
       return stats;
+   }
+
+   function handleMarkSubmit(item) {
+      return event => {
+         event.preventDefault();
+         const value = Number(event.target[`mark-${item.id}`].value);
+         setIsModalOpen(true);
+         setModalData({
+            value,
+            id: item.id,
+            title: item.title,
+            name: item.student_name,
+         });
+      };
+   }
+
+   function handleEditMark() {
+      editMark({ id: modalData.id, mark: modalData.value, status: 'published' }).then(() => {
+         setIsModalOpen(false);
+      });
    }
 
    return (
@@ -58,22 +82,27 @@ export default function AssignmentMarks() {
                                     </Link>
                                  </td>
                                  {item.status === 'pending' ? (
-                                    <td className='table-td flex justify-end input-mark'>
-                                       <input
-                                          className='login-input rounded-md'
-                                          max={item.totalMark}
-                                          placeholder='Mark'
-                                          value=''
-                                       />
-                                       <svg
-                                          fill='none'
-                                          viewBox='0 0 24 24'
-                                          strokeWidth='2'
-                                          stroke='currentColor'
-                                          className='w-6 h-6 text-green-500 cursor-pointer hover:text-green-400'
-                                       >
-                                          <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                                       </svg>
+                                    <td className='table-td flex justify-end'>
+                                       <form onSubmit={handleMarkSubmit(item)} className='input-mark'>
+                                          <input
+                                             type='number'
+                                             name={`mark-${item.id}`}
+                                             placeholder='Mark'
+                                             max={item.totalMark}
+                                             className='login-input rounded-md'
+                                          />
+                                          <button type='submit'>
+                                             <svg
+                                                fill='none'
+                                                strokeWidth='2'
+                                                viewBox='0 0 24 24'
+                                                stroke='currentColor'
+                                                className='w-6 h-6 text-green-500 cursor-pointer hover:text-green-400'
+                                             >
+                                                <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                                             </svg>
+                                          </button>
+                                       </form>
                                     </td>
                                  ) : (
                                     <td className='table-td flex justify-end'>{item.mark}</td>
@@ -86,6 +115,14 @@ export default function AssignmentMarks() {
                </div>
             </div>
          </section>
+         <Modal
+            type='edit'
+            isOpen={isModalOpen}
+            onClick={handleEditMark}
+            setIsOpen={setIsModalOpen}
+            isLoading={editMarkApi.isLoading}
+            message={`Do you want to set mark of "${modalData.title}" assignment for "${modalData.name}"?`}
+         />
       </Fragment>
    );
 }

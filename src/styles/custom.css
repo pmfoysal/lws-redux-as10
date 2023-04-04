@@ -351,6 +351,13 @@ table tr * {
 .input-mark input {
    width: 3.5rem;
    padding: 0.25rem 0.5rem;
+   appearance: textfield;
+   -webkit-appearance: textfield;
+}
+
+.input-mark input::-webkit-inner-spin-button,
+.input-mark input::-webkit-outer-spin-button {
+   appearance: none;
 }
 
 .table-td a {

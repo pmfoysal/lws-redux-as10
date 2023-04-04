@@ -188,8 +188,8 @@
       "createdAt": "2023-04-03T10:19:42.318Z",
       "repo_link": "http://localhost:3000/assignment/1_debounce-function-in-javascript-javascript-job-interview-question",
       "totalMark": 100,
-      "status": "pending",
-      "mark": 0,
+      "status": "published",
+      "mark": 10,
       "id": 1
     },
     {
@@ -200,8 +200,8 @@
       "createdAt": "2023-04-03T10:25:22.829Z",
       "repo_link": "http://localhost:3000/assignment/2_javascript-tips-and-tricks-javascript-job-interview-questions",
       "totalMark": 100,
-      "status": "pending",
-      "mark": 0,
+      "status": "published",
+      "mark": 20,
       "id": 2
     }
   ],
