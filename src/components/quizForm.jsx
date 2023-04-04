@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import quizSchema from '../schemas/quiz.json';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetVideosQuery } from '../redux/features/videos/enhancer';
-import { useEditQuizMutation, useGetQuizQuery } from '../redux/features/quizzes/enhancer';
+import { useAddQuizMutation, useEditQuizMutation, useGetQuizQuery } from '../redux/features/quizzes/enhancer';
 
 export default function QuizForm({ mode }) {
    const navigate = useNavigate();
@@ -13,6 +13,7 @@ export default function QuizForm({ mode }) {
    const videosApi = useGetVideosQuery();
    const [opened, setOpened] = useState([0]);
    const [videoId, setVideoId] = useState('');
+   const [addQuiz, addQuizApi] = useAddQuizMutation();
    const [editQuiz, editQuizApi] = useEditQuizMutation();
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [questions, setQuestions] = useState([quizSchema]);
@@ -73,14 +74,28 @@ export default function QuizForm({ mode }) {
    function handleQuiz() {
       const payload = questions;
       if (mode === 'add') {
-         // const video = videosApi.data?.find(item => item.id === Number(videoId));
-         // if (video?.id !== undefined) {
-         //    payload.video_id = video.id;
-         //    payload.video_title = video.title;
-         //    addAssignment(payload).then(() => {
-         //       navigate('/admin/assignments');
-         //    });
-         // }
+         const video = videosApi.data?.find(item => item.id === Number(videoId));
+         if (video?.id !== undefined) {
+            Promise.all(
+               payload.map(item => {
+                  return new Promise((resolve, reject) => {
+                     addQuiz({
+                        ...item,
+                        video_id: video.id,
+                        video_title: video.title,
+                     })
+                        .then(({ data }) => {
+                           resolve(data);
+                        })
+                        .catch(error => {
+                           reject(error);
+                        });
+                  });
+               })
+            ).then(() => {
+               navigate('/admin/quizzes');
+            });
+         }
       } else if (mode === 'edit') {
          if (quizApi.data?.id !== undefined) {
             payload[0].id = quizApi.data.id;
