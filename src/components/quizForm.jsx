@@ -1,9 +1,22 @@
-import { useState } from 'react';
+import Modal from './modal';
+import Error from '../pages/common/error';
+import urlToId from '../utilities/urlToId';
+import { useEffect, useState } from 'react';
 import quizSchema from '../schemas/quiz.json';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetVideosQuery } from '../redux/features/videos/enhancer';
+import { useEditQuizMutation, useGetQuizQuery } from '../redux/features/quizzes/enhancer';
 
 export default function QuizForm({ mode }) {
+   const navigate = useNavigate();
+   const { id_title } = useParams();
+   const videosApi = useGetVideosQuery();
    const [opened, setOpened] = useState([0]);
+   const [videoId, setVideoId] = useState('');
+   const [editQuiz, editQuizApi] = useEditQuizMutation();
+   const [isModalOpen, setIsModalOpen] = useState(false);
    const [questions, setQuestions] = useState([quizSchema]);
+   const quizApi = useGetQuizQuery(urlToId(id_title), { skip: mode !== 'edit' || !id_title });
 
    function handleAddQuestion() {
       setQuestions(prev => [...prev, quizSchema]);
@@ -52,24 +65,78 @@ export default function QuizForm({ mode }) {
       });
    }
 
+   function handleSubmit(event) {
+      event.preventDefault();
+      if (videoId !== '') setIsModalOpen(true);
+   }
+
+   function handleQuiz() {
+      const payload = questions;
+      if (mode === 'add') {
+         // const video = videosApi.data?.find(item => item.id === Number(videoId));
+         // if (video?.id !== undefined) {
+         //    payload.video_id = video.id;
+         //    payload.video_title = video.title;
+         //    addAssignment(payload).then(() => {
+         //       navigate('/admin/assignments');
+         //    });
+         // }
+      } else if (mode === 'edit') {
+         if (quizApi.data?.id !== undefined) {
+            payload[0].id = quizApi.data.id;
+            editQuiz(payload[0]).then(() => {
+               navigate('/admin/quizzes');
+            });
+         }
+      }
+   }
+
+   useEffect(() => {
+      if (mode === 'edit' && id_title && quizApi.data?.id !== undefined) {
+         setVideoId(quizApi.data.video_id);
+         setQuestions([
+            {
+               question: quizApi.data.question,
+               options: quizApi.data.options,
+            },
+         ]);
+      }
+   }, [mode, id_title, quizApi]);
+
+   if (mode === 'edit' && !quizApi.isLoading) {
+      if (quizApi.data?.id === undefined) {
+         return <Error />;
+      }
+   }
+
    return (
-      <form className='add-form'>
-         <input
-            type='text'
-            autoComplete
+      <form className='add-form' onSubmit={handleSubmit}>
+         <select
             required
-            className='login-input rounded-md'
-            placeholder='Video Title'
-            readOnly={mode === 'edit'}
-         />
+            value={videoId}
+            disabled={mode === 'edit'}
+            className='login-input rounded-md dropdown'
+            onChange={e => {
+               if (mode !== 'edit') setVideoId(e.target.value);
+            }}
+         >
+            <option value='' hidden>
+               Select Video
+            </option>
+            {videosApi.data?.map((item, index) => (
+               <option key={`video-${index}`} value={item.id}>
+                  {item.title}
+               </option>
+            ))}
+         </select>
          {questions.map((qItem, qIndex) => (
             <div key={`question-${qIndex}`} className={`question ${opened.includes(qIndex) ? 'active' : ''}`}>
                <textarea
-                  type='text'
-                  autoComplete
-                  required
                   rows={2}
+                  required
+                  type='text'
                   value={qItem.question}
+                  autoComplete='question'
                   className='login-input rounded-md'
                   placeholder={`Question ${qIndex + 1}`}
                   onChange={e => handleQuestion(e.target.value, qIndex)}
@@ -92,9 +159,9 @@ export default function QuizForm({ mode }) {
                               onChange={e => handleOption('isCorrect', e.target.checked, qIndex, oIndex)}
                            />
                            <input
-                              type='text'
-                              autoComplete
                               required
+                              type='text'
+                              autoComplete='option'
                               value={option.option}
                               className='login-input rounded-md'
                               placeholder={`Option ${oIndex + 1}`}
@@ -127,9 +194,17 @@ export default function QuizForm({ mode }) {
                type='submit'
                className='mt-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500'
             >
-               Submit
+               Update
             </button>
          )}
+         <Modal
+            type={mode}
+            isOpen={isModalOpen}
+            onClick={handleQuiz}
+            setIsOpen={setIsModalOpen}
+            isLoading={editQuizApi.isLoading}
+            message={`Do you want to ${mode} this quiz?`}
+         />
       </form>
    );
 }
