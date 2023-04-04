@@ -196,7 +196,7 @@ textarea {
    text-transform: capitalize;
 }
 
-*:disabled {
+*:disabled:not(select) {
    opacity: 0.5;
    pointer-events: none;
    cursor: default;

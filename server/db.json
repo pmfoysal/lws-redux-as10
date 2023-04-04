@@ -86,11 +86,11 @@
       "totalMark": 100
     },
     {
-      "id": 2,
-      "title": "Assignment 2 - Implement Best Practices",
+      "title": "aaaa",
       "video_id": 2,
       "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
-      "totalMark": 100
+      "totalMark": 20,
+      "id": 2
     }
   ],
   "quizzes": [
