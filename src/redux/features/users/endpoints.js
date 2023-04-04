@@ -1,6 +1,6 @@
 import api from '../../api';
 
-const users = api.injectEndpoints({
+export default api.injectEndpoints({
    endpoints: builder => ({
       getUsers: builder.query({
          query: () => '/users',
@@ -10,6 +10,3 @@ const users = api.injectEndpoints({
       }),
    }),
 });
-
-export default users;
-export const { useGetUsersQuery, useGetUserQuery } = users;

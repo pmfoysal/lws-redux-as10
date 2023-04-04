@@ -5,6 +5,24 @@ const { updateQueryData } = quizMarks.util;
 
 const enhancedQuizMarks = quizMarks.enhanceEndpoints({
    endpoints: {
+      getQuizMarks: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
+      getQuizMark: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
       addQuizMark: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
@@ -15,7 +33,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -40,7 +58,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
             } catch (error) {
                updatedGetQuizMark.undo();
                updatedGetQuizMarks.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -56,7 +74,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetQuizMark.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },

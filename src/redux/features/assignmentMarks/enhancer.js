@@ -5,6 +5,24 @@ const { updateQueryData } = assignmentMarks.util;
 
 const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
    endpoints: {
+      getAssignmentMarks: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
+      getAssignmentMark: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
       addAssignmentMark: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
@@ -15,7 +33,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -40,7 +58,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
             } catch (error) {
                updatedGetAssignmentMark.undo();
                updatedGetAssignmentMarks.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -56,7 +74,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetAssignmentMarks.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },

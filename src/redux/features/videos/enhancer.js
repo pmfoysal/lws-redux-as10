@@ -5,6 +5,24 @@ const { updateQueryData } = videos.util;
 
 const enhancedVideos = videos.enhanceEndpoints({
    endpoints: {
+      getVideos: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
+      getVideo: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
       addVideo: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
@@ -15,7 +33,7 @@ const enhancedVideos = videos.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -40,7 +58,7 @@ const enhancedVideos = videos.enhanceEndpoints({
             } catch (error) {
                updatedGetVideo.undo();
                updatedGetVideos.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -56,7 +74,7 @@ const enhancedVideos = videos.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetVideos.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },

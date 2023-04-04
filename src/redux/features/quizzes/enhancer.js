@@ -5,6 +5,24 @@ const { updateQueryData } = quizzes.util;
 
 const enhancedQuizzes = quizzes.enhanceEndpoints({
    endpoints: {
+      getQuizzes: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
+      getQuiz: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
       addQuiz: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
@@ -15,7 +33,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -40,7 +58,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
             } catch (error) {
                updatedGetQuiz.undo();
                updatedGetQuizzes.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -56,7 +74,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetQuizzes.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },

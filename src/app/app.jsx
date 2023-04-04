@@ -8,10 +8,10 @@ import PageLoader from '../components/pageLoader';
 import StudentRoute from '../routes/studentRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../redux/features/others/auth';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { pushHistory } from '../redux/features/others/history';
-import { useGetUserQuery } from '../redux/features/users/endpoints';
 import signoutThunk from '../redux/middlewares/signoutThunk';
+import { pushHistory } from '../redux/features/others/history';
+import { useGetUserQuery } from '../redux/features/users/enhancer';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 const Error = lazy(() => import('../pages/common/error'));
 

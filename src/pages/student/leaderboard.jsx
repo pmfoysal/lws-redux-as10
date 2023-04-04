@@ -2,7 +2,7 @@ import Head from '../../components/head';
 import { useSelector } from 'react-redux';
 import PageLoader from '../../components/pageLoader';
 import { Fragment, useEffect, useState } from 'react';
-import { useGetUsersQuery } from '../../redux/features/users/endpoints';
+import { useGetUsersQuery } from '../../redux/features/users/enhancer';
 import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { selectQuizMarkCount } from '../../redux/features/quizMarks/selectors';
 import { useGetAssignmentMarksQuery } from '../../redux/features/assignmentMarks/enhancer';

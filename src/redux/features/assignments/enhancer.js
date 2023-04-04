@@ -5,6 +5,24 @@ const { updateQueryData } = assignments.util;
 
 const enhancedAssignments = assignments.enhanceEndpoints({
    endpoints: {
+      getAssignments: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
+      getAssignment: {
+         onQueryStarted: async (data, { queryFulfilled }) => {
+            try {
+               await queryFulfilled;
+            } catch (error) {
+               message.error(error.message || error.error.error || error.error.data);
+            }
+         },
+      },
       addAssignment: {
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             try {
@@ -15,7 +33,7 @@ const enhancedAssignments = assignments.enhanceEndpoints({
                   })
                );
             } catch (error) {
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -40,7 +58,7 @@ const enhancedAssignments = assignments.enhanceEndpoints({
             } catch (error) {
                updatedGetAssignment.undo();
                updatedGetAssignments.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
@@ -56,7 +74,7 @@ const enhancedAssignments = assignments.enhanceEndpoints({
                await queryFulfilled;
             } catch (error) {
                deletedGetAssignments.undo();
-               message.error(error.message || error.error.data);
+               message.error(error.message || error.error.error || error.error.data);
             }
          },
       },
