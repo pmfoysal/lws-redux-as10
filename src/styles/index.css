@@ -1178,7 +1178,7 @@ body {
    text-align: center;
 }
 
-.table-td input {
+/* .table-td input {
    width: 3.5rem;
    border-radius: 0.375rem;
    --tw-bg-opacity: 1;
@@ -1197,7 +1197,7 @@ body {
    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
    --tw-ring-opacity: 1;
    --tw-ring-color: rgb(2 132 199 / var(--tw-ring-opacity));
-}
+} */
 
 .assignment-status {
    display: flex;

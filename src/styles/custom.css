@@ -226,6 +226,11 @@ textarea {
    grid-template-columns: repeat(10, 1fr);
 }
 
+.marks-table-row {
+   display: grid;
+   grid-template-columns: repeat(10, 1fr);
+}
+
 table tr * {
    white-space: nowrap;
    text-overflow: ellipsis;
@@ -244,6 +249,21 @@ table tr * {
 .assignment-table-row th:nth-child(2),
 .assignment-table-row td:nth-child(2) {
    grid-column: span 4;
+}
+
+.marks-table-row th:nth-child(1),
+.marks-table-row td:nth-child(1) {
+   grid-column: span 4;
+}
+
+.marks-table-row th:nth-child(2),
+.marks-table-row td:nth-child(2) {
+   grid-column: span 2;
+}
+
+.marks-table-row th:nth-child(3),
+.marks-table-row td:nth-child(3) {
+   grid-column: span 2;
 }
 
 .table-th,
@@ -322,4 +342,21 @@ table tr * {
 .modal-icon.edit svg {
    background-color: rgba(124, 58, 237, 0.2);
    color: rgb(124, 58, 237);
+}
+
+.input-mark {
+   gap: 0.5rem;
+}
+
+.input-mark input {
+   width: 3.5rem;
+   padding: 0.25rem 0.5rem;
+}
+
+.table-td a {
+   color: rgb(30, 144, 255);
+}
+
+.table-td a:hover {
+   opacity: 0.95;
 }
