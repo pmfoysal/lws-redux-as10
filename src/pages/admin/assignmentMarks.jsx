@@ -77,7 +77,7 @@ export default function AssignmentMarks() {
                                  <td className='table-td'>{getDateTime(item.createdAt)}</td>
                                  <td className='table-td'>{item.student_name}</td>
                                  <td className='table-td'>
-                                    <Link to={item.repo_link} target='_blank'>
+                                    <Link to={item.repo_link} target='_blank' className='link'>
                                        View Code
                                     </Link>
                                  </td>

@@ -360,10 +360,10 @@ table tr * {
    appearance: none;
 }
 
-.table-td a {
+.table-td .link {
    color: rgb(30, 144, 255);
 }
 
-.table-td a:hover {
+.table-td .link:hover {
    opacity: 0.95;
 }
