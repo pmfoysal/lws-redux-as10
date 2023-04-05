@@ -1,3 +1,4 @@
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useSelector } from 'react-redux';
 import PageLoader from '../../components/pageLoader';
@@ -7,7 +8,6 @@ import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { selectQuizMarkCount } from '../../redux/features/quizMarks/selectors';
 import { useGetAssignmentMarksQuery } from '../../redux/features/assignmentMarks/enhancer';
 import { selectAssignmentMarkCount } from '../../redux/features/assignmentMarks/selectors';
-import Empty from '../common/empty';
 
 export default function Leaderboard() {
    const usersApi = useGetUsersQuery();
@@ -45,7 +45,7 @@ export default function Leaderboard() {
    }, [usersApi, quizMarksApi, assignmentMarksApi, user]);
 
    if (!usersApi.isLoading && !usersApi.data?.length) {
-      return <Empty text='No Users Found to Show in Leaderboard!' />;
+      return <Empty text='No users found to show in leaderboard!' />;
    }
 
    return (

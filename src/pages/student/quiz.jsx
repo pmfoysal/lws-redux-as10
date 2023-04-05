@@ -1,4 +1,4 @@
-import Error from '../common/error';
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useSelector } from 'react-redux';
 import urlToId from '../../utilities/urlToId';
@@ -84,7 +84,11 @@ export default function Quiz() {
       }
    }, [quizzesApi, id_title]);
 
-   if (hasQuizMark) return <Error />;
+   if (hasQuizMark) return <Empty text='You have already submitted this quiz!' />;
+
+   if (!quizzesApi.isLoading && !quizzesApi.data?.length) {
+      return <Empty text='No quizzes found with this video!' />;
+   }
 
    return (
       <Fragment>
