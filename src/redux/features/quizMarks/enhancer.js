@@ -66,7 +66,7 @@ const enhancedQuizMarks = quizMarks.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             const deletedGetQuizMark = dispatch(
                updateQueryData('getQuizMarks', undefined, draft => {
-                  const index = draft.findIndex(quizMark => quizMark.id === data.id);
+                  const index = draft.findIndex(quizMark => quizMark.id === data);
                   draft.splice(index, 1);
                })
             );

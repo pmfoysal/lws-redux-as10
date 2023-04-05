@@ -1,7 +1,7 @@
 import Layout from '../layouts/layout';
 import AuthRoute from '../routes/authRoute';
-import Sitemap from '../pages/common/sitemap';
 import AdminRoute from '../routes/adminRoute';
+// import Sitemap from '../pages/common/sitemap';
 import { Suspense, lazy, useEffect } from 'react';
 import { Admin, Student, Common } from '../pages';
 import PageLoader from '../components/pageLoader';
@@ -49,7 +49,7 @@ export default function App() {
          <Routes>
             <Route path='/' element={<Layout />}>
                <Route index element={<AuthRoute page={<Student.Signin />} />} />
-               <Route path='sitemap' element={<Sitemap />} />
+               {/* <Route path='sitemap' element={<Sitemap />} /> */}
                <Route path='signin' element={<AuthRoute page={<Student.Signin />} />} />
                <Route path='signup' element={<AuthRoute page={<Student.Signup />} />} />
                <Route path='forget-password' element={<AuthRoute page={<Common.ForgetPassword />} />} />

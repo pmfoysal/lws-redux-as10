@@ -55,8 +55,8 @@ export default function VideoForm({ mode }) {
          <input
             required
             type='text'
-            autoComplete
             value={title}
+            autoComplete='title'
             placeholder='Video Title'
             className='login-input rounded-md'
             onChange={e => setTitle(e.target.value)}
@@ -65,8 +65,8 @@ export default function VideoForm({ mode }) {
             required
             rows={6}
             type='text'
-            autoComplete
             value={description}
+            autoComplete='description'
             placeholder='Video Description'
             className='login-input rounded-md'
             onChange={e => setDescription(e.target.value)}
@@ -75,7 +75,7 @@ export default function VideoForm({ mode }) {
             required
             type='url'
             value={url}
-            autoComplete
+            autoComplete='url'
             placeholder='Video Url'
             className='login-input rounded-md'
             onChange={e => setUrl(e.target.value)}
@@ -84,8 +84,8 @@ export default function VideoForm({ mode }) {
             <input
                required
                type='text'
-               autoComplete
                value={views}
+               autoComplete='views'
                placeholder='Total Views'
                className='login-input rounded-md'
                onChange={e => setViews(e.target.value)}
@@ -93,8 +93,8 @@ export default function VideoForm({ mode }) {
             <input
                required
                type='text'
-               autoComplete
                value={duration}
+               autoComplete='duration'
                placeholder='Total Duration'
                className='login-input rounded-md'
                onChange={e => setDuration(e.target.value)}

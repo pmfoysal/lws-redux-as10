@@ -66,7 +66,7 @@ const enhancedAssignmentMarks = assignmentMarks.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             const deletedGetAssignmentMarks = dispatch(
                updateQueryData('getAssignmentMarks', undefined, draft => {
-                  const index = draft.findIndex(assignmentMark => assignmentMark.id === data.id);
+                  const index = draft.findIndex(assignmentMark => assignmentMark.id === data);
                   draft.splice(index, 1);
                })
             );

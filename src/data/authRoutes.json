@@ -1,1 +1,15 @@
-["/", "/signin", "/signup", "/admin", "/admin/signin", "/admin/signup", "/forget-password"]
+[
+   "/",
+   "/signin",
+   "/signin/",
+   "/signup",
+   "/signup/",
+   "/admin",
+   "/admin/",
+   "/admin/signin",
+   "/admin/signin/",
+   "/admin/signup",
+   "/admin/signup/",
+   "/forget-password",
+   "/forget-password/"
+]

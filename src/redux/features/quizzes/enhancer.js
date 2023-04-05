@@ -66,7 +66,7 @@ const enhancedQuizzes = quizzes.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             const deletedGetQuizzes = dispatch(
                updateQueryData('getQuizzes', undefined, draft => {
-                  const index = draft.findIndex(quiz => quiz.id === data.id);
+                  const index = draft.findIndex(quiz => quiz.id === data);
                   draft.splice(index, 1);
                })
             );

@@ -66,7 +66,7 @@ const enhancedVideos = videos.enhanceEndpoints({
          onQueryStarted: async (data, { queryFulfilled, dispatch }) => {
             const deletedGetVideos = dispatch(
                updateQueryData('getVideos', undefined, draft => {
-                  const index = draft.findIndex(video => video.id === data.id);
+                  const index = draft.findIndex(video => video.id === data);
                   draft.splice(index, 1);
                })
             );
