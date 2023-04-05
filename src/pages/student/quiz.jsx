@@ -94,7 +94,7 @@ export default function Quiz() {
       <Fragment>
          <Head title={`Quizzes - ${quizzes[0]?.video_title}`} desc={`Quizzes of "${quizzes[0]?.video_title}"`} />
          {quizzesApi.isLoading || videosApi.isLoading || quizMarksApi.isLoading ? <PageLoader /> : null}
-         <section className='py-6 bg-primary'>
+         <section className='py-6'>
             <div className='mx-auto max-w-7xl px-5 lg:px-0'>
                <div className='mb-8'>
                   <h1 className='text-2xl font-bold'>Quizzes for "{quizzes[0]?.video_title}"</h1>

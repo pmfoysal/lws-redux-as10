@@ -1,3 +1,4 @@
+import Empty from '../common/empty';
 import { Link } from 'react-router-dom';
 import Head from '../../components/head';
 import { Fragment, useState } from 'react';
@@ -60,57 +61,61 @@ export default function AssignmentMarks() {
                      </li>
                   </ul>
                   <div className='overflow-x-auto mt-4'>
-                     <table className='divide-y-1 text-base divide-gray-600 w-full'>
-                        <thead>
-                           <tr className='marks-table-row'>
-                              <th className='table-th'>Assignment</th>
-                              <th className='table-th'>Date</th>
-                              <th className='table-th'>Student Name</th>
-                              <th className='table-th'>Repo Link</th>
-                              <th className='table-th flex justify-end'>Mark</th>
-                           </tr>
-                        </thead>
-                        <tbody className='divide-y divide-slate-600/50'>
-                           {assignmentMarksApi.data?.map((item, index) => (
-                              <tr key={`assignment-mark-${index}`} className='marks-table-row'>
-                                 <td className='table-td'>{item.title}</td>
-                                 <td className='table-td'>{getDateTime(item.createdAt)}</td>
-                                 <td className='table-td'>{item.student_name}</td>
-                                 <td className='table-td'>
-                                    <Link to={item.repo_link} target='_blank' className='link'>
-                                       View Code
-                                    </Link>
-                                 </td>
-                                 {item.status === 'pending' ? (
-                                    <td className='table-td flex justify-end'>
-                                       <form onSubmit={handleMarkSubmit(item)} className='input-mark'>
-                                          <input
-                                             type='number'
-                                             name={`mark-${item.id}`}
-                                             placeholder='Mark'
-                                             max={item.totalMark}
-                                             className='login-input rounded-md'
-                                          />
-                                          <button type='submit'>
-                                             <svg
-                                                fill='none'
-                                                strokeWidth='2'
-                                                viewBox='0 0 24 24'
-                                                stroke='currentColor'
-                                                className='w-6 h-6 text-green-500 cursor-pointer hover:text-green-400'
-                                             >
-                                                <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                                             </svg>
-                                          </button>
-                                       </form>
-                                    </td>
-                                 ) : (
-                                    <td className='table-td flex justify-end'>{item.mark}</td>
-                                 )}
+                     {assignmentMarksApi.data?.length ? (
+                        <table className='divide-y-1 text-base divide-gray-600 w-full'>
+                           <thead>
+                              <tr className='marks-table-row'>
+                                 <th className='table-th'>Assignment</th>
+                                 <th className='table-th'>Date</th>
+                                 <th className='table-th'>Student Name</th>
+                                 <th className='table-th'>Repo Link</th>
+                                 <th className='table-th flex justify-end'>Mark</th>
                               </tr>
-                           ))}
-                        </tbody>
-                     </table>
+                           </thead>
+                           <tbody className='divide-y divide-slate-600/50'>
+                              {assignmentMarksApi.data?.map((item, index) => (
+                                 <tr key={`assignment-mark-${index}`} className='marks-table-row'>
+                                    <td className='table-td'>{item.title}</td>
+                                    <td className='table-td'>{getDateTime(item.createdAt)}</td>
+                                    <td className='table-td'>{item.student_name}</td>
+                                    <td className='table-td'>
+                                       <Link to={item.repo_link} target='_blank' className='link'>
+                                          View Code
+                                       </Link>
+                                    </td>
+                                    {item.status === 'pending' ? (
+                                       <td className='table-td flex justify-end'>
+                                          <form onSubmit={handleMarkSubmit(item)} className='input-mark'>
+                                             <input
+                                                type='number'
+                                                name={`mark-${item.id}`}
+                                                placeholder='Mark'
+                                                max={item.totalMark}
+                                                className='login-input rounded-md'
+                                             />
+                                             <button type='submit'>
+                                                <svg
+                                                   fill='none'
+                                                   strokeWidth='2'
+                                                   viewBox='0 0 24 24'
+                                                   stroke='currentColor'
+                                                   className='w-6 h-6 text-green-500 cursor-pointer hover:text-green-400'
+                                                >
+                                                   <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                                                </svg>
+                                             </button>
+                                          </form>
+                                       </td>
+                                    ) : (
+                                       <td className='table-td flex justify-end'>{item.mark}</td>
+                                    )}
+                                 </tr>
+                              ))}
+                           </tbody>
+                        </table>
+                     ) : (
+                        <Empty scope='inner' text='No assignment marks found to show here!' />
+                     )}
                   </div>
                </div>
             </div>

@@ -33,7 +33,7 @@ export default function Error({ code = 404, role = '' }) {
    return (
       <Fragment>
          <Head title={message} />
-         <section className='py-6 bg-primary h-screen grid place-items-center error-page'>
+         <section className='py-6 h-screen grid place-items-center error-page'>
             <div className='mx-auto px-5 lg:px-0'>
                <h1 className='text-2xl font-bold error-code'>{'<! ' + code + ' />'}</h1>
                <p className='error-message'>{message}</p>
