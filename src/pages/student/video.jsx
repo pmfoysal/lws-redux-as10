@@ -1,3 +1,4 @@
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useSelector } from 'react-redux';
 import getDate from '../../utilities/getDate';
@@ -14,7 +15,6 @@ import { useGetQuizzesQuery } from '../../redux/features/quizzes/enhancer';
 import { selectAssignment } from '../../redux/features/assignments/selectors';
 import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { useGetAssignmentsQuery } from '../../redux/features/assignments/enhancer';
-import Empty from '../common/empty';
 
 export default function Video() {
    const { id_title } = useParams();

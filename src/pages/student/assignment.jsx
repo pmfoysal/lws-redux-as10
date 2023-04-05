@@ -1,4 +1,4 @@
-import Error from '../common/error';
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useSelector } from 'react-redux';
 import isUrl from '../../utilities/isUrl';
@@ -60,7 +60,7 @@ export default function Assignment() {
    }, [assignmentMarksApi, id_title, user, assignment]);
 
    if (!assignmentsApi.isLoading && assignment.id === undefined) {
-      return <Error />;
+      return <Empty text='No assignment found with this video!' />;
    }
 
    return (
