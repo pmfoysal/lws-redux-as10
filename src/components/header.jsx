@@ -15,7 +15,7 @@ export default function Header() {
    }
 
    return (
-      <nav className='shadow-md'>
+      <nav className='shadow-md header'>
          <div className='max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3'>
             <Link to={user.role === 'admin' ? '/admin/dashboard' : '/video'}>
                <img className='h-10' src='/assets/icons/learningportal.svg' />

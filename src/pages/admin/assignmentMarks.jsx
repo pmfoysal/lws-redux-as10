@@ -54,10 +54,10 @@ export default function AssignmentMarks() {
                         Total <span>{getStats(assignmentMarksApi.data || []).total}</span>
                      </li>
                      <li>
-                        Pending <span>{getStats(assignmentMarksApi.data || []).pending}</span>
+                        Mark Sent <span>{getStats(assignmentMarksApi.data || []).published}</span>
                      </li>
                      <li>
-                        Mark Sent <span>{getStats(assignmentMarksApi.data || []).published}</span>
+                        Pending <span>{getStats(assignmentMarksApi.data || []).pending}</span>
                      </li>
                   </ul>
                   <div className='overflow-x-auto mt-4'>

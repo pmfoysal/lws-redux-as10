@@ -58,7 +58,7 @@ export default function Leaderboard() {
                   <h3 className='text-lg font-bold'>Your Position in Leaderboard</h3>
                   <table className='text-base w-full border border-slate-600/50 rounded-md my-4'>
                      <thead>
-                        <tr>
+                        <tr className='leaderboard-table-row'>
                            <th className='table-th !text-center'>Rank</th>
                            <th className='table-th !text-center'>Name</th>
                            <th className='table-th !text-center'>Quiz Mark</th>
@@ -68,13 +68,13 @@ export default function Leaderboard() {
                      </thead>
                      <tbody>
                         {userRank.id !== undefined ? (
-                           <tr className='border-2 border-cyan'>
+                           <tr className='border-2 border-cyan leaderboard-table-row'>
                               <td className='table-td text-center font-bold'>{userRank.rank}</td>
                               <td className='table-td text-center font-bold'>{userRank.name}</td>
                               <td className='table-td text-center font-bold'>{userRank.quizMark}</td>
                               <td className='table-td text-center font-bold'>{userRank.assignmentMark}</td>
                               <td className='table-td text-center font-bold'>
-                                 {userRank.quizMark + userRank.assignmentMark || null}
+                                 {userRank.quizMark + userRank.assignmentMark || 0}
                               </td>
                            </tr>
                         ) : null}
@@ -85,7 +85,7 @@ export default function Leaderboard() {
                   <h3 className='text-lg font-bold'>Top 20 Result</h3>
                   <table className='text-base w-full border border-slate-600/50 rounded-md my-4'>
                      <thead>
-                        <tr className='border-b border-slate-600/50'>
+                        <tr className='border-b border-slate-600/50 leaderboard-table-row'>
                            <th className='table-th !text-center'>Rank</th>
                            <th className='table-th !text-center'>Name</th>
                            <th className='table-th !text-center'>Quiz Mark</th>
@@ -97,7 +97,7 @@ export default function Leaderboard() {
                         {usersRank
                            .filter(item => item.rank <= 20 && item.role === 'student')
                            .map((item, index) => (
-                              <tr key={`student-${index}`} className='border-b border-slate-600/50'>
+                              <tr key={`student-${index}`} className='border-b border-slate-600/50 leaderboard-table-row'>
                                  <td className='table-td text-center'>{item.rank}</td>
                                  <td className='table-td text-center'>{item.name}</td>
                                  <td className='table-td text-center'>{item.quizMark}</td>
