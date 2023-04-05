@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useParams } from 'react-router-dom';
 import urlToId from '../../utilities/urlToId';
@@ -9,6 +10,10 @@ import { useGetQuizQuery } from '../../redux/features/quizzes/enhancer';
 export default function QuizEdit() {
    const { id_title } = useParams();
    const quizApi = useGetQuizQuery(urlToId(id_title), { skip: !id_title });
+
+   if (!quizApi.isLoading && quizApi.data?.id === undefined) {
+      return <Empty text='No quiz found with this parameters!' />;
+   }
 
    return (
       <Fragment>

@@ -1,5 +1,4 @@
 import Modal from './modal';
-import Error from '../pages/common/error';
 import urlToId from '../utilities/urlToId';
 import { useEffect, useState } from 'react';
 import quizSchema from '../schemas/quiz.json';
@@ -117,12 +116,6 @@ export default function QuizForm({ mode }) {
          ]);
       }
    }, [mode, id_title, quizApi]);
-
-   if (mode === 'edit' && !quizApi.isLoading) {
-      if (quizApi.data?.id === undefined) {
-         return <Error />;
-      }
-   }
 
    return (
       <form className='add-form' onSubmit={handleSubmit}>
