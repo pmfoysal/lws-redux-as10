@@ -14,6 +14,7 @@ import { useGetQuizzesQuery } from '../../redux/features/quizzes/enhancer';
 import { selectAssignment } from '../../redux/features/assignments/selectors';
 import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { useGetAssignmentsQuery } from '../../redux/features/assignments/enhancer';
+import Empty from '../common/empty';
 
 export default function Video() {
    const { id_title } = useParams();
@@ -59,6 +60,14 @@ export default function Video() {
          } else setHasQuizMark(false);
       } else setHasQuizMark(false);
    }, [quizMarksApi, video, user]);
+
+   if (!videosApi.isLoading && videosApi.data?.length && id_title && video.title === undefined) {
+      return <Empty text='No video found with this parameters!' />;
+   }
+
+   if (!videosApi.isLoading && !videosApi.data?.length) {
+      return <Empty text='No videos found to play here!' />;
+   }
 
    return (
       <Fragment>
