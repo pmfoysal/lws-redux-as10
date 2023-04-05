@@ -368,8 +368,12 @@ table tr * {
    opacity: 0.95;
 }
 
-.page-empty {
+.page-empty.outer {
    height: calc(100vh - 64px);
+}
+
+.page-empty.inner {
+   padding-top: 3rem;
 }
 
 .container-empty {
