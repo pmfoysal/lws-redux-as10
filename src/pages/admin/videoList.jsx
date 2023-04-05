@@ -1,3 +1,4 @@
+import Empty from '../common/empty';
 import { Link } from 'react-router-dom';
 import Head from '../../components/head';
 import { Fragment, useState } from 'react';
@@ -16,6 +17,10 @@ export default function VideoList() {
       deleteVideo(ModalData.id).then(() => {
          setIsModalOpen(false);
       });
+   }
+
+   if (!videosApi.isLoading && !videosApi.data?.length) {
+      return <Empty text='No videos found to show here!' />;
    }
 
    return (
