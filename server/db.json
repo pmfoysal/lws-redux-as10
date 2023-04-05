@@ -55,6 +55,13 @@
       "name": "Foysal Ahmmed",
       "role": "student",
       "id": 8
+    },
+    {
+      "email": "pmfoysal@gmail.com",
+      "password": "$2a$10$4rGzV.QWqRvQlO4bTpDsdeYtxJ6FcmqNiqKYuqptyrkx2Js1OE.Vu",
+      "name": "Foysal Ahmmed",
+      "role": "student",
+      "id": 9
     }
   ],
   "videos": [
@@ -287,6 +294,18 @@
       "status": "published",
       "mark": 20,
       "id": 2
+    },
+    {
+      "student_id": 9,
+      "student_name": "Foysal Ahmmed",
+      "assignment_id": 1,
+      "title": "Assignment 1 - Implement Debounce Function",
+      "createdAt": "2023-04-04T18:34:08.743Z",
+      "repo_link": "https://pms-lws-as10.netlify.app/assignment/1_debounce-function-in-javascript-javascript-job-interview-question",
+      "totalMark": 100,
+      "status": "published",
+      "mark": 90,
+      "id": 3
     }
   ],
   "quizMark": [
@@ -313,6 +332,18 @@
       "totalMark": 5,
       "mark": 5,
       "id": 2
+    },
+    {
+      "student_id": 9,
+      "student_name": "Foysal Ahmmed",
+      "video_id": 2,
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "totalQuiz": 4,
+      "totalCorrect": 3,
+      "totalWrong": 1,
+      "totalMark": 20,
+      "mark": 15,
+      "id": 3
     }
   ]
 }

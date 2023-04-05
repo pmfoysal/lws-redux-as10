@@ -1,6 +1,10 @@
 export default function ForgetForm() {
+   function handleSubmit(event) {
+      event.preventDefault();
+   }
+
    return (
-      <form className='mt-8 space-y-6' action='#' method='POST'>
+      <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
          <input type='hidden' name='remember' value='true' />
          <div className='rounded-md shadow-sm -space-y-px'>
             <div>
@@ -13,7 +17,7 @@ export default function ForgetForm() {
                   type='email'
                   autoComplete='email'
                   required
-                  className='login-input rounded-t-md'
+                  className='login-input rounded-md'
                   placeholder='Email address'
                />
             </div>

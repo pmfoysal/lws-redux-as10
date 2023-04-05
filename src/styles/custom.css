@@ -367,3 +367,20 @@ table tr * {
 .table-td .link:hover {
    opacity: 0.95;
 }
+
+.page-empty {
+   height: calc(100vh - 64px);
+}
+
+.container-empty {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+}
+
+.text-empty {
+   color: rgba(255, 255, 255, 0.25);
+   font-size: 2rem;
+   text-align: center;
+}

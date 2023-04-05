@@ -7,6 +7,7 @@ import { useGetQuizMarksQuery } from '../../redux/features/quizMarks/enhancer';
 import { selectQuizMarkCount } from '../../redux/features/quizMarks/selectors';
 import { useGetAssignmentMarksQuery } from '../../redux/features/assignmentMarks/enhancer';
 import { selectAssignmentMarkCount } from '../../redux/features/assignmentMarks/selectors';
+import Empty from '../common/empty';
 
 export default function Leaderboard() {
    const usersApi = useGetUsersQuery();
@@ -43,11 +44,15 @@ export default function Leaderboard() {
       }
    }, [usersApi, quizMarksApi, assignmentMarksApi, user]);
 
+   if (!usersApi.isLoading && !usersApi.data?.length) {
+      return <Empty text='No Users Found to Show in Leaderboard!' />;
+   }
+
    return (
       <Fragment>
          <Head title='Leader Board' />
          {usersApi.isLoading || quizMarksApi.isLoading || assignmentMarksApi.isLoading ? <PageLoader /> : null}
-         <section className='py-6 bg-primary'>
+         <section className='py-6'>
             <div className='mx-auto max-w-7xl px-5 lg:px-0'>
                <div>
                   <h3 className='text-lg font-bold'>Your Position in Leaderboard</h3>
@@ -62,13 +67,17 @@ export default function Leaderboard() {
                         </tr>
                      </thead>
                      <tbody>
-                        <tr className='border-2 border-cyan'>
-                           <td className='table-td text-center font-bold'>{userRank.rank}</td>
-                           <td className='table-td text-center font-bold'>{userRank.name}</td>
-                           <td className='table-td text-center font-bold'>{userRank.quizMark}</td>
-                           <td className='table-td text-center font-bold'>{userRank.assignmentMark}</td>
-                           <td className='table-td text-center font-bold'>{userRank.quizMark + userRank.assignmentMark || 0}</td>
-                        </tr>
+                        {userRank.id !== undefined ? (
+                           <tr className='border-2 border-cyan'>
+                              <td className='table-td text-center font-bold'>{userRank.rank}</td>
+                              <td className='table-td text-center font-bold'>{userRank.name}</td>
+                              <td className='table-td text-center font-bold'>{userRank.quizMark}</td>
+                              <td className='table-td text-center font-bold'>{userRank.assignmentMark}</td>
+                              <td className='table-td text-center font-bold'>
+                                 {userRank.quizMark + userRank.assignmentMark || null}
+                              </td>
+                           </tr>
+                        ) : null}
                      </tbody>
                   </table>
                </div>
