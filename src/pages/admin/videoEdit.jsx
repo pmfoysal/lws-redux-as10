@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import Empty from '../common/empty';
 import Head from '../../components/head';
 import { useParams } from 'react-router-dom';
 import urlToId from '../../utilities/urlToId';
@@ -9,6 +10,10 @@ import { useGetVideoQuery } from '../../redux/features/videos/enhancer';
 export default function VideoEdit() {
    const { id_title } = useParams();
    const { data: video, isLoading } = useGetVideoQuery(urlToId(id_title), { skip: !id_title });
+
+   if (id_title && !isLoading && video?.id === undefined) {
+      return <Empty text='No video found with this parameters!' />;
+   }
 
    return (
       <Fragment>

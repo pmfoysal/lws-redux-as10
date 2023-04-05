@@ -1,5 +1,4 @@
 import Modal from './modal';
-import Error from '../pages/common/error';
 import urlToId from '../utilities/urlToId';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -50,12 +49,6 @@ export default function VideoForm({ mode }) {
          setDescription(video.description);
       }
    }, [video, mode]);
-
-   if (mode === 'edit' && !isLoading) {
-      if (video?.id === undefined) {
-         return <Error />;
-      }
-   }
 
    return (
       <form className='add-form' onSubmit={handleSubmit}>
